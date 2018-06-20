@@ -1,0 +1,19 @@
+.modal-header {
+    font-size: 25px;
+    color: white;
+    background-color: #424242;
+}
+
+.modal-footer button {
+    font-size: 20px;
+    /* color: white;
+    background-color: #424242;     */
+}
+.form-control {
+    text-align: center;
+    font-size: 20px;
+}
+
+input, .modal-footer button {
+    width: 50%;
+}

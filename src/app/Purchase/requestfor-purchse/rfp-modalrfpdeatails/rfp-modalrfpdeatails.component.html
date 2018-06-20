@@ -1,0 +1,92 @@
+<div class="modal fade " id="detailModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a>
+          <i class="fas fa-info-circle"></i> รายละเอียดการสั่งซื้อ</a>
+        <button type="button" class="close text-light" (click)="close()" aria-label="Close">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <table class="table table-bordered table-hover">
+            <tbody *ngIf="detailData">
+              <tr>
+                <td class="c1">
+                  <span>รหัสการสั่งซื้อ</span>
+                </td>
+                <td class="c2">{{detailData.order_id}}</td>
+              </tr>
+              <tr>
+                <td class="c1">
+                  <span>รหัสพนักงาน</span>
+                </td>
+                <td class="c2">{{detailData.emp_id_buy}}</td>
+              </tr>
+              <tr>
+                <td class="c1">
+                  <span>รหัสผู้ใช้งาน</span>
+                </td>
+                <td class="c2">{{detailData.user_id}}</td>
+              </tr>
+              <tr>
+                <td class="c1">
+                  <span>ชื่อผู้ใช้งาน</span>
+                </td>
+                <td class="c2">{{detailData.username}}</td>
+              </tr>
+              <tr>
+                <td class="c1">
+                  <span>ชื่อไทย</span>
+                </td>
+                <td class="c2">{{detailData.fullname_th}}</td>
+              </tr>
+              <tr>
+                <td class="c1">
+                  <span>ชื่ออังกฤษ</span>
+                </td>
+                <td class="c2">{{detailData.fullname_en}}</td>
+              </tr>
+              <tr>
+                <td class="c1">
+                  <span>รายละเอียด</span>
+                </td>
+                <td class="c2">{{detailData.description}}</td>
+              </tr>
+              <tr>
+                <td class="c1">
+                  <span>ที่อยู่</span>
+                </td>
+                <td class="c2">{{detailData.address}}</td>
+              </tr>
+              <tr>
+                <td class="c1">
+                  <span>Tax</span>
+                </td>
+                <td class="c2">{{detailData.my_tax_no}}</td>
+              </tr>
+              <tr>
+                <td class="c1">
+                  <span>เบอร์โทร</span>
+                </td>
+                <td class="c2">{{detailData.phone}}</td>
+              </tr>
+              <tr>
+                <td class="c1">
+                  <span>วันที่สั่งซื้อ</span>
+                </td>
+                <td class="c2">{{detailData.order_dt | date: 'dd-MM-yyyy HH:mm'}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-primary form-control" (click)="close()">ปิด</button>
+      </div>
+    </div>
+  </div>
+</div>

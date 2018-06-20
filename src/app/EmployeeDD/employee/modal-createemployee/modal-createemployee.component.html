@@ -1,0 +1,137 @@
+<div class="modal fade" id="ModalCreateEmployee" data-backdrop="static" aria-labelledby="ModalCreateEmployeeTitle" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a>
+                    <i class="fas fa-plus-circle"></i>เพิ่ม พนักงาน</a>
+                <button type="button" class="close" (click)="OnClose()">
+                    <span aria-hidden="true">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form [formGroup]="FormCreate" (submit)="OnCreate()">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group d-flex justify-content-center">
+                                    <input class="form-control-lg" type="text" placeholder="ชื่อ (อังกฤษ)" formControlName="firstname_en" required minlength="2"
+                                        maxlength="50" required>
+                                </div>
+                                <!-- <div *ngIf="!FormCreate.controls['firstname_en'].valid && !FormCreate.controls['firstname_en'].minlength && FormCreate.controls['firstname_en'].touched"
+                                    class="alert alert-danger">
+                                    Please Enter A-Z , a-z only At least 3 characters.
+                                </div> -->
+                                <div *ngIf="this.FormCreate.controls['firstname_en'].dirty && this.FormCreate.controls['firstname_en'].errors?.required"
+                                    class="alert alert-danger">
+                                    กรุณากรอกชื่อ!
+                                </div>
+                                <div *ngIf=" this.FormCreate.controls['firstname_en'].errors?.minlength" class="alert alert-danger">
+                                    กรุณาใส่ชื่อ อย่างน้อย 2 ตัวอักษร!
+                                </div>
+                                <div *ngIf="this.FormCreate.controls['firstname_en'].errors?.pattern" class="alert alert-danger">
+                                    กรุณาใส่ชื่อ (อังกฤษ) เท่านั้น!
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group d-flex justify-content-center">
+                                    <input class="form-control-lg" type="text" placeholder="นามสกุล (อังกฤษ)" formControlName="lastname_en" required minlength="3"
+                                        maxlength="50" required>
+                                </div>
+                                <!-- <div *ngIf="!FormCreate.controls['lastname_en'].valid && !FormCreate.controls['lastname_en'].minlength && FormCreate.controls['lastname_en'].touched"
+                                    class="alert alert-danger">
+                                    Please Enter A-Z , a-z only At least 3 characters.
+                                </div> -->
+                                <div *ngIf="this.FormCreate.controls['lastname_en'].dirty && this.FormCreate.controls['lastname_en'].errors?.required" class="alert alert-danger">
+                                    กรุณากรอกนามสกุล!
+                                </div>
+                                <div *ngIf=" this.FormCreate.controls['lastname_en'].errors?.minlength" class="alert alert-danger">
+                                    กรุณาใส่นามสกุล อย่างน้อย 3 ตัวอักษร!
+                                </div>
+                                <div *ngIf="this.FormCreate.controls['lastname_en'].errors?.pattern" class="alert alert-danger">
+                                    กรุณาใส่นามสกุล (อังกฤษ) เท่านั้น!
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col">
+                                <div class="form-group d-flex justify-content-center">
+                                    <input class="form-control-lg" type="text" placeholder="ชื่อ (ไทย)" formControlName="firstname_th" required minlength="2"
+                                        maxlength="50" required>
+                                </div>
+                                <!-- <div *ngIf="!FormCreate.controls['firstname_th'].valid && !FormCreate.controls['firstname_th'].minlength && FormCreate.controls['firstname_th'].touched"
+                                    class="alert alert-danger">
+                                    Please Enter Thai Language Only At least 3 characters.
+                                </div> -->
+                                <div *ngIf="this.FormCreate.controls['firstname_th'].dirty && this.FormCreate.controls['firstname_th'].errors?.required"
+                                    class="alert alert-danger">
+                                    กรุณากรอกชื่อ!
+                                </div>
+                                <div *ngIf=" this.FormCreate.controls['firstname_th'].errors?.minlength" class="alert alert-danger">
+                                    กรุณาใส่ชื่อ อย่างน้อย 2 ตัวอักษร!
+                                </div>
+                                <div *ngIf="this.FormCreate.controls['firstname_th'].errors?.pattern" class="alert alert-danger">
+                                    กรุณาใส่ชื่อ (ไทย) เท่านั้น!
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group d-flex justify-content-center">
+                                    <input class="form-control-lg" type="text" placeholder="นามสกุล (ไทย)" formControlName="lastname_th" required minlength="3"
+                                        maxlength="50" required>
+                                </div>
+                                <!-- <div *ngIf="!FormCreate.controls['lastname_th'].valid && !FormCreate.controls['lastname_th'].minlength && FormCreate.controls['lastname_th'].touched"
+                                    class="alert alert-danger">
+                                    Please Enter Thai Language Only Only At least 3 characters.
+                                </div> -->
+                                <div *ngIf="this.FormCreate.controls['lastname_th'].dirty && this.FormCreate.controls['lastname_th'].errors?.required" class="alert alert-danger">
+                                    กรุณากรอกนามสกุล!
+                                </div>
+                                <div *ngIf=" this.FormCreate.controls['lastname_th'].errors?.minlength" class="alert alert-danger">
+                                    กรุณาใส่นามสกุล อย่างน้อย 3 อักษร!
+                                </div>
+                                <div *ngIf="this.FormCreate.controls['lastname_th'].errors?.pattern" class="alert alert-danger">
+                                    กรุณาใส่นามสกุล (ไทย) เท่านั้น!
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col">
+                                <div class="form-group d-flex justify-content-center">
+                                    <input class="form-control-lg" type="text" placeholder="ชื่อเล่น" formControlName="nickname" required minlength="2" maxlength="20"
+                                        required>
+                                </div>
+                                <!-- <div *ngIf="!FormCreate.controls['nickname'].valid && FormCreate.controls['nickname'].touched" class="alert alert-danger">
+                                    Please enter Thai&English language Only At least 3 characters.
+                                </div> -->
+                                <div *ngIf="this.FormCreate.controls['nickname'].dirty && this.FormCreate.controls['nickname'].errors?.required" class="alert alert-danger">
+                                    กรุณาใส่ชื่อเล่น!
+                                </div>
+                                <div *ngIf=" this.FormCreate.controls['nickname'].errors?.minlength" class="alert alert-danger">
+                                    กรุณาใส่ชื่อเล่น อย่างน้อย 2 ตัวอักษร!
+                                </div>
+                                <div *ngIf="this.FormCreate.controls['nickname'].errors?.pattern" class="alert alert-danger">
+                                    กรุณาใส่ชื่อเล่น (ไทย) หรือ (อังกฤษ) เท่านั้น!
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group d-flex justify-content-center">
+                                    <select class="form-control-lg select-dep" formControlName="department" required>
+                                        <option disabled value="">เลือกแผนก</option>
+                                        <option *ngFor="let dep of dep_list" value="{{dep.dep_id}}">{{dep.dep_name}}</option>
+                                    </select>
+                                </div>
+                                <!-- <div *ngIf="!FormCreate.controls['department'].valid && FormCreate.controls['department'].touched" class="alert alert-danger">
+                                    Please select department!
+                                </div> -->
+                            </div>
+                        </div>
+
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button type="submit" class="btn btn-success" [disabled]="this.FormCreate.invalid">เพิ่ม</button>
+                            <button type="button" class="btn btn-secondary" (click)="OnClose()">ยกเลิก</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+.modal-header {
+    cursor: default;
+    font-size: 25px;
+    color: white;
+    background-color: #424242;
+}
+
+.modal {
+    background-color: rgba(5, 5, 5, 0.6);
+}
+
+.fas {
+    color: white;
+}
+
+.modal-footer button {
+    font-size: 20px;
+    width: 40%;
+}
+
+.form-control-lg {
+    border: 1px solid gray;
+    width: 50%;
+    font-size: 20px;
+}
+
+textarea {
+    width: 100%;
+    border: 1px solid rgb(121, 121, 121);
+    border-radius: 5px;
+}
+
+.alert {
+    font-size: 14px;
+}

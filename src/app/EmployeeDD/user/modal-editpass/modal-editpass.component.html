@@ -1,0 +1,66 @@
+<div class="modal fade" id="editUserPassModal" data-backdrop="static" aria-labelledby="editUserPassModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a>
+          <i class="fas fa-edit"></i> แก้ไข รหัสผ่าน</a>
+        <button type="button" class="close" (click)="closeModal()">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <form [formGroup]="formChangePass" (submit)="submitEditPass()">
+        <div class="modal-body">
+          <div class="form-group d-flex justify-content-center">
+            <input class="form-control-lg" type="password" placeholder="รหัสผ่านใหม่" formControlName="password1" minlength="6" maxlength="20"
+              required>
+          </div>
+          <div *ngIf="this.formChangePass.controls['password1'].dirty && this.formChangePass.controls['password1'].errors?.required"
+            class="container-fluid d-flex justify-content-center alert alert-danger">
+            กรุณาใส่รหัสผ่าน!
+          </div>
+          <div *ngIf="this.formChangePass.controls['password1'].errors?.minlength" class="container-fluid d-flex justify-content-center alert alert-danger">
+            ใส่รหัสผ่านอย่างน้อย 6 ตัวอักษร!
+          </div>
+          <!-- <div *ngIf="this.formChangePass.controls['password1'].errors?.pattern" class="container-fluid d-flex justify-content-center alert alert-danger">
+            กรุณาใส่ a-z A-Z 0-9 เท่านั้น!
+          </div> -->
+          <div class="form-group d-flex justify-content-center">
+            <input class="form-control-lg" type="password" placeholder="ยืนยันรหัสผ่านใหม่" formControlName="password2" minlength="6"
+              maxlength="20" required>
+          </div>
+          <div *ngIf="this.formChangePass.controls['password2'].dirty && this.formChangePass.controls['password2'].errors?.required"
+            class="container-fluid d-flex justify-content-center alert alert-danger">
+            กรุณาใส่รหัสผ่าน!
+          </div>
+          <div *ngIf="this.formChangePass.controls['password2'].errors?.minlength" class="container-fluid d-flex justify-content-center alert alert-danger">
+            ใส่รหัสผ่านอย่างน้อย 6 ตัวอักษร!
+          </div>
+          <!-- <div *ngIf="this.formChangePass.controls['password2'].errors?.pattern" class="container-fluid d-flex justify-content-center alert alert-danger">
+            กรุณาใส่ a-z A-Z 0-9 . เท่านั้น!
+          </div> -->
+          <div *ngIf="(this.formChangePass.controls['password1'].value && this.formChangePass.controls['password2'].value) && (this.formChangePass.controls['password2'].value != this.formChangePass.controls['password1'].value || this.formChangePass.controls['password1'].value != this.formChangePass.controls['password2'].value)"
+            class="container-fluid d-flex justify-content-center alert alert-danger">
+            รหัสผ่านไม่ตรงกัน!
+          </div>
+          <!-- <div *ngIf="!formChangePass.controls['password1'].valid && formChangePass.controls['password1'].touched || !formChangePass.controls['password2'].valid && formChangePass.controls['password2'].touched"
+            class="alert alert-danger ">
+            <p>กรุณาใส่ A-Z a-z 0-9 เท่านั้น และ ใส่ 6 ตัวอักษรขึ้นไป !!</p>
+          </div>
+          <div *ngIf="formChangePass.controls['password1'].value && formChangePass.controls['password2'].value && formChangePass.controls['password2'].touched">
+            <div *ngIf="formChangePass.controls['password1'].value != formChangePass.controls['password2'].value">
+              <div class="alert alert-danger text-center">
+                รหัสผ่านไม่ตรงกัน !!
+              </div>
+            </div>
+          </div> -->
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button class="btn btn-success" type="submit" [disabled]="this.formChangePass.invalid || formChangePass.controls['password1'].value != formChangePass.controls['password2'].value">บันทึก</button>
+          <button class="btn btn-secondary" type="button" (click)="closeModal()">ยกเลิก</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="modal fade" id="typeEditModal" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-edit"></i> แก้ไข ชนิดอุปกรณ์</a>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onClose()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <form [formGroup]="form" (submit)="onEdit()">
+        <div class="modal-body">
+          <div class="container-fluid ">
+            <div class="form-group d-flex justify-content-center">
+              <select class="form-control-lg" formControlName="cate" required>
+                <option value="">เลือกหมวดหมู่ อุปกรณ์</option>
+                <option *ngFor="let data of data_cate" [value]="data.cate_id">{{data.category_name}} </option>
+              </select>
+            </div>
+            <div class="form-group d-flex justify-content-center">
+              <input class="form-control-lg" type="text" name="type" placeholder="type" formControlName="type" minlength="3" maxlength="40" required appAutofocus>
+            </div>
+            <div class="container-fluid d-flex justify-content-center">
+              <div *ngIf="this.form.controls['type'].errors?.pattern" class=" alert alert-danger ">
+                กรุณาใช้ ก-ฮ, a-z, A-Z และ 0-9 เท่านั้น !
+              </div>
+            </div>
+            <div class="container-fluid d-flex justify-content-center">
+              <div *ngIf="this.form.controls['type'].errors?.minlength" class=" alert alert-danger ">
+                กรุณาใส่ข้อมูล อย่างน้อย 3 ตัวอักษร !
+              </div>
+            </div>
+            <div class="container-fluid d-flex justify-content-center">
+              <div *ngIf="this.form.controls['type'].errors?.required" class=" alert alert-danger ">
+                กรุณาใส่ ชนิดของอุปกรณ์ที่จะค้นหา !
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="submit" class="btn btn-warning" [disabled]="form.invalid">บันทึก</button>
+          <button type="button" class="btn btn-secondary" (click)="onClose()">ยกเลิก</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

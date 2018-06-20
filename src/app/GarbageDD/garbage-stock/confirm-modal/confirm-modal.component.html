@@ -1,0 +1,23 @@
+<div class="modal fade " id="conModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a>
+          <i class="fas fa-undo-alt"></i> กู้คืน อุปกรณ์</a>
+        <button type="button" class="close" (click)="closeModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <a>ชื่ออุปกรณ์: "{{stockName}}"</a>
+        <br>
+        <br>
+        <h4>ยืยยันการกู้คืน !!!</h4>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-warning" (click)="restoreItem()">กู้คืน</button>
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+</div>

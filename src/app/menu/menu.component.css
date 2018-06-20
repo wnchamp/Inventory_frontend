@@ -1,0 +1,54 @@
+.bd-item {
+    text-align: center;
+    margin-top: 20px;
+    border: 1px solid red;
+    border-radius: 3px;
+    
+}
+
+.menu-head {
+    text-align: center;
+}
+
+.menu-head>h1 {
+    border-bottom: 2px solid white;
+    width: 170px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+}
+
+.row {
+    padding-top: 15px;
+}
+
+.logo {
+    height: 64px;
+    widows: 64px;
+}
+
+#sidebarBtn {
+    display: none;
+}
+
+@media (max-width: 991.98px) {
+    #sidebarBtn {
+        display: block;
+    }
+}
+
+@media (max-width: 1400px) {
+    .menu-head > h1{
+        font-size: 30px;
+        width: 140px;
+    }
+    .menu-head > h3{
+        font-size: 20px;
+    }
+
+    .text-light{
+        font-size: 15px;
+    }
+}
+

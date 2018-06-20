@@ -1,0 +1,25 @@
+
+.card-header{
+    font-size: 23px;
+  }
+
+  .card-body{
+    font-size: 20px;
+  }
+
+  .far{
+    vertical-align: middle;
+    float: right;
+  }
+  .tbprofile
+{
+  vertical-align: middle;
+  float: right;
+}
+table
+{
+margin: 0 auto;
+}
+
+.td1{ float: right;}
+.td2{ float: left;}

@@ -1,0 +1,63 @@
+<div class="modal fade" id="repairModalmultireceive" data-backdrop="static" data-keyboard="false" aria-labelledby="defectModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-hands-helping"></i> รับคืน</a>
+        <button type="button" class="close" (click)="onClosemodal()">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <div class="form-group container-fluid d-flex justify-content-center">
+            <input type="text" placeholder="บาร์โค้ด" class="form-control-lg" formControlName="barcode" (keyup.enter)="onAddbarcode()" minlength="10" maxlength="20" required>
+            <button type="button" [disabled]="this.form.invalid" class="btn btn-success form-control-lg" (click)="onAddbarcode()">Add</button>
+          </div>
+          <div *ngIf="this.form.controls['barcode'].dirty && this.form.controls['barcode'].errors?.required" class="container-fluid d-flex justify-content-center alert alert-danger">
+            กรุณากรอเลขบาร์โค้ด !
+          </div>
+          <div *ngIf="this.form.controls['barcode'].errors?.minlength" class="container-fluid d-flex justify-content-center alert alert-danger">
+            กรุณากรอกเลขบาร์โด้ด 10 ตัวชึ้นไป!
+          </div>
+          <div *ngIf="this.form.controls['barcode'].errors?.pattern" class="container-fluid d-flex justify-content-center alert alert-danger">
+            กรุฯาใช้ตัวเลข 0-9 เท่านั้น !
+          </div>
+          <br>
+          <div class="d-flex justify-content-center">
+            <table class="table" *ngIf="data_rp.length > 0">
+              <thead>
+                <tr class="text-center">
+                  <th>รหัสอุปกรณ์</th>
+                  <th>ชื่ออุปกรณ์</th>
+                  <th>สถานะ</th>
+                  <th width="15%">ฟังก์ชั่น</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-center" *ngFor="let data of data_rp">
+                  <td>{{data.st_id}}</td>
+                  <td>{{data.st_name}}</td>
+                  <td>{{data.status_name}}</td>
+                  <td>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="onSaverow(data.re_id,data.barcode)">+</button>
+                    <button type="button" class="btn btn-secondary btn-sm" (click)="openMultiReceiveDetailModal(data)">i</button>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="onRemovebarcode(data.barcode)">x</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer d-flex justify-content-center" *ngIf="data_rp.length > 0">
+        <button type="button" class="btn btn-primary" (click)="onSave()">บันทึก</button>
+        <button type="button" class="btn btn-secondary" (click)="onClosemodal()">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-multi-receive-detail-modal [mStat]="mDetailStat" [sData]="d2m" (c)="closeModal($event)"></app-multi-receive-detail-modal>

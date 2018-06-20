@@ -1,0 +1,86 @@
+<div class="modal fade" id="defectModalmultirepiar" data-backdrop="static" data-keyboard="false" aria-labelledby="defectModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-cogs"></i>ส่งซ่อม</a>
+        <button type="button" class="close" (click)="onClose()">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <div class="form-group container-fluid d-flex justify-content-center">
+            <input type="text" placeholder="บาร์โค้ด" class="form-control-lg" formControlName="barcode" (keyup.enter)="onAdd()" minlength="10"
+              maxlength="20" required>
+            <button type="button" [disabled]="this.form.controls['barcode'].invalid" class="btn btn-success form-control-lg" (click)="onAdd()">Add</button>
+          </div>
+          <div *ngIf="this.form.controls['barcode'].dirty && this.form.controls['barcode'].errors?.required" class="container-fluid d-flex justify-content-center alert alert-danger">
+            กรุณากรอกเลขบาโค้ด!
+          </div>
+          <div *ngIf="this.form.controls['barcode'].errors?.minlength" class="container-fluid d-flex justify-content-center alert alert-danger">
+            กรุณากรอกเลขบาโค้ด อย่างน้อย 10 ตัว !!
+          </div>
+          <div *ngIf="this.form.controls['barcode'].errors?.pattern" class="container-fluid d-flex justify-content-center alert alert-danger">
+            กรุณากรอกรายละเอียด !!
+          </div>
+          <br>
+          <div class="d-flex justify-content-center">
+            <table class="table">
+              <thead>
+                <tr class="text-center" *ngIf="data_stock.length > 0">
+                  <th>รหัสอุปกรณ์</th>
+                  <th>ชื่ออุปกรณ์</th>
+                  <th>บาร์โค้ด</th>
+                  <th width="15%">ฟังก์ชั่น</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-center" *ngFor="let data of data_stock">
+                  <td>{{data.st_id}}</td>
+                  <td>{{data.st_name}}</td>
+                  <td>{{data.barcode | barcode}}</td>
+                  <td>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="onSaverow(data.de_id,data.barcode)">+</button>
+                    <button type="button" class="btn btn-secondary btn-sm" (click)="openDetailModal(data)">i</button>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="onRemove(data.barcode)">x</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="form-group container-fluid d-flex justify-content-center">
+            <textarea class="" placeholder="รายละเอียด ....." cols="30" rows="5" formControlName="description" *ngIf="data_stock.length > 0"
+              minlength="3" maxlength="500"></textarea>
+          </div>
+          <div class="container-fluid d-flex justify-content-center">
+            <span *ngIf="data_stock.length > 0 && this.form.controls['description'].errors?.pattern" class="alert alert-danger">
+              กรุณากรอกข้อมูลด้วย ก-ฮ, a-z, A-Z และ 0-9 เท่านั้น!
+            </span>
+          </div>
+          <div class="container-fluid d-flex justify-content-center">
+            <span *ngIf="data_stock.length > 0 && this.form.controls['description'].errors?.required" class="alert alert-danger">
+              กรุณากรอกรายละเอียด !
+            </span>
+          </div>
+          <div class="container-fluid d-flex justify-content-center">
+            <span *ngIf="data_stock.length > 0 && this.form.controls['description'].errors?.minlength" class="alert alert-danger">
+              กรุณากรอกข้อมูลอย้างน้อย 3 ตัวอักษร !!!
+            </span>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer d-flex justify-content-center" *ngIf="data_stock.length > 0">
+        <button type="button" class="btn btn-primary" [disabled]="this.form.controls['description'].invalid" (click)="onSave()">บันทึก</button>
+        <button type="button" class="btn btn-secondary" (click)="onClose()">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modaldefect-multirepair-adddescription [openModal]="statusSelectrepairModal" [defectID]="defect_id" (close)="onClosemodalAdddes($event)"
+  (success)="onChecksuccess($event)"></app-modaldefect-multirepair-adddescription>
+<app-multi-repair-detail-modal [mStat]="mDetailStat" [sData]="d2m" (c)="closeModal($event)"></app-multi-repair-detail-modal>

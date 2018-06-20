@@ -1,0 +1,102 @@
+<nav class="accordion" id="accordionable">
+  <div>
+    <a class="btn btn-block topic dashboard" routerLink="/home/dashboard">
+      <i class="fas fa-chart-pie"></i>
+      <a class="text-topic" style="cursor: pointer;">แดชบอร์ด</a>
+    </a>
+  </div>
+  <hr>
+
+  <div id="headingStock">
+    <a class="btn btn-block topic stock" routerLink="/home/stock">
+      <i class="fas fa-box-open"></i>
+      <a class="text-topic" style="cursor: pointer;">สต๊อก</a>
+    </a>
+
+  </div>
+  <hr>
+  <div id="headingManaStock">
+    <a class="btn btn-block topic" data-toggle="collapse" data-target="#collapseManaStock" aria-expanded="false" aria-controls="collapseOne">
+      <i class="fas fa-clipboard-list"></i>
+      <a class="text-topic">จัดการสต๊อก</a>
+    </a>
+    <div id="collapseManaStock" class="collapse" aria-labelledby="headingManaStock" data-parent="#accordionable">
+      <li class="subtop">
+        <button class="text-suptop" routerLink="/home/category">หมวดหมู่</button>
+      </li>
+      <li class="subtop">
+        <button class="text-suptop" routerLink="/home/type">ชนิด อุปกรณ์</button>
+      </li>
+      <li class="subtop">
+        <button class="text-suptop" routerLink="/home/brand">แบรนด์</button>
+      </li>
+      <li class="subtop">
+        <button class="text-suptop" routerLink="/home/conn-typebrand">ชนิด & แบรนด์</button>
+      </li>
+    </div>
+  </div>
+  <hr>
+
+  <div id="headingBr">
+    <a class="btn btn-block topic" data-toggle="collapse" data-target="#collapseBorrow" aria-expanded="false" aria-controls="collapseOne">
+      <i class="fas fa-hands"></i>
+      <a class="text-topic">การยืม</a>
+    </a>
+    <div id="collapseBorrow" class="collapse" aria-labelledby="headingBr" data-parent="#accordionable">
+      <li class="subtop">
+        <button class="text-suptop" routerLink="/home/borrowadmin">รายการที่ยืม</button>
+      </li>
+      <li class="subtop">
+        <button class="text-suptop" routerLink="/home/borrow-employeeadmin">พนักงาน</button>
+      </li>
+    </div>
+  </div>
+  <hr>
+
+  <div id="headingDf">
+    <a class="btn btn-block topic" data-toggle="collapse" data-target="#collapseDefect" aria-expanded="false" aria-controls="collapseOne">
+      <i class="fas fa-cogs"></i>
+      <a class="text-topic">อุปกรณ์ชำรุด</a>
+    </a>
+    <div id="collapseDefect" class="collapse" aria-labelledby="headingDf" data-parent="#accordionable">
+      <li class="subtop">
+        <button class="text-suptop" routerLink="/home/defect">รายการชำรุด</button>
+      </li>
+      <li class="subtop">
+        <button class="text-suptop" routerLink="/home/repair">รายการซ่อม</button>
+      </li>
+      <li class="subtop">
+        <button class="text-suptop" routerLink="/home/receive">รายการคืน</button>
+      </li>
+    </div>
+  </div>
+  <hr>
+
+  <div id="headingRB">
+    <a class="btn btn-block topic" data-toggle="collapse" data-target="#collapseRB" aria-expanded="false" aria-controls="collapseRB">
+      <i class="fas fa-trash-alt"></i>
+      <a class="text-topic"> ถังขยะ</a>
+    </a>
+    <div id="collapseRB" class="collapse" aria-labelledby="headingRB" data-parent="#accordionable">
+      <li class="subtop">
+        <button class="text-suptop" routerLink="/home/garbage-stock">อุปกรณ์</button>
+      </li>
+      <li class="subtop">
+        <button class="text-suptop" routerLink="/home/garbage-category">หมวดหมู่ อุปกรณ์</button>
+      </li>
+      <li class="subtop">
+        <button class="text-suptop" routerLink="/home/garbage-type">ชนิด อุปกรณ์</button>
+      </li>
+      <li class="subtop">
+        <button class="text-suptop" routerLink="/home/garbage-brand">แบรนด์</button>
+      </li>
+      <li class="subtop">
+        <button class="text-suptop" routerLink="/home/garbage-employee">พนักงาน</button>
+      </li>
+      <li class="subtop">
+        <button class="text-suptop" routerLink="/home/garbage-department">แผนก</button>
+      </li>
+    </div>
+  </div>
+  <hr>
+</nav>

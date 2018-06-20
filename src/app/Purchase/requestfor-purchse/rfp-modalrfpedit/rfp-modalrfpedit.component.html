@@ -1,0 +1,212 @@
+<div class="modal fade" id="rfpModaledit" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-edit"></i> Edit Purchase List</a>
+        <button type="button" class="close" (click)="onClose()" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+        <form [formGroup]="form">
+          <div class="form-inline d-flex justify-content-center noselect">
+            <a class="text-avesta">A V E S T A</a>
+          </div>
+          <div class="form-inline d-flex justify-content-center noselect" style="margin-bottom: 20px;">
+            <a class="text" style="text-decoration: underline">REQUEST FOR PURCHASE</a>
+          </div>
+
+          <div class="form-inline d-flex justify-content-end noselect" style="margin-bottom: 20px;" *ngIf="dataOrderlist">
+            <a class="text-po" style="width: 10%">ID#</a>
+            <a class="text-po" style="width: 10%">{{dataOrderlist.data_order.order_id}}</a>
+          </div>
+
+          <div class="form-inline d-flex justify-content-start noselect">
+            <div>
+              <a class="text" style="margin-left: 5px;">Order Information</a>
+            </div>
+          </div>
+          <table class="table table-bordered noselect">
+            <tbody formGroupName="order_info">
+              <tr>
+                <th scope="row">Ordered by</th>
+                <td>
+                  <input type="text" formControlName="order_by" class="form-control" placeholder="kraiwith kamchu" readonly>
+                </td>
+                <td class="form-inline">Phone:
+                  <input type="text" id="phone" formControlName="phone" class="form-control" placeholder="0888888888" (focus)="onSelectpriceunit('phone')">
+                </td>
+              </tr>
+              <tr>
+                <th>Address</th>
+                <td colspan="2">
+                  <textarea id="address" formControlName="address" class="form-control" placeholder="กทม. บกป. คต. ปณ. 50000" (focus)="onSelectpriceunit('address')"></textarea>
+                </td>
+              </tr>
+              <!-- <tr>
+                  <th scope="row">Date</th>
+                  <td>
+                    <input type="text" formControlName="date" class="form-control" placeholder="29-06-2020">
+                  </td>
+                </tr> -->
+            </tbody>
+          </table>
+
+          <!-- <div class="form-inline d-flex justify-content-start noselect">
+              <a class="text" style="margin-left: 5px;">Vendor Information</a>
+            </div>
+            <table class="table table-bordered noselect">
+              <tbody formGroupName="vendor_info">
+                <tr>
+                  <th scope="row">Name</th>
+                  <td width="80%">
+                    <input type="text" formControlName="name" class="form-control" placeholder="addlink.com" required>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Address</th>
+                  <td>
+                    <input type="text" formControlName="address" class="form-control" placeholder="กทม." required>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Phone</th>
+                  <td>
+                    <input type="text" formControlName="phone" class="form-control" placeholder="088-88888" required maxlength="11">
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Attention</th>
+                  <td>
+                    <input type="text" formControlName="attention" class="form-control" placeholder="Sakai Masato" required>
+                  </td>
+                </tr>
+              </tbody>
+            </table> -->
+        </form>
+
+        <form [formGroup]="form">
+          <div class="form-inline d-flex justify-content-between noselect">
+            <a class="text" style="margin-left: 5px;">Order List</a>
+            <button type="button" class="btn btn-success btn-sm" (click)="onaddList()" style="margin-bottom: 3px; width: 100px;">
+              <i class="fas fa-plus"></i>
+              Add List</button>
+          </div>
+          <table class="table table-bordered noselect">
+            <thead>
+              <tr class="text-center">
+                <th>Item</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th width="10%">QTY</th>
+                <th width="13%">PRICE/UNIT</th>
+                <th width="15%">AMOUNT</th>
+                <th width="6%">Act.</th>
+              </tr>
+            </thead>
+            <tbody formArrayName="Items" *ngFor="let item of getList.controls; let i = index">
+              <tr *ngIf="dataOrderlist" [formGroupName]="i" [ngClass]="{'bg-newdata': !dataOrderlist.data_stock[i]}">
+                <td class="text-center">
+                  <a type="text" class="form-control">{{i+1}}</a>
+                </td>
+                <td>
+                  <input type="text" id="{{i}}name" formControlName="part_no" class="form-control" placeholder="Name" (focus)="onSelectpriceunit(i+'name')"
+                    required>
+                </td>
+                <td>
+                  <input type="text" id="{{i}}description" formControlName="description" class="form-control" placeholder="Description" (focus)="onSelectpriceunit(i+'description')">
+                </td>
+                <td>
+                  <input type="text" id="{{i}}quty" formControlName="qty" class="form-control text-center" placeholder="QTY" required maxlength="3"
+                    (focus)="onSelectpriceunit(i+'quty')" (change)="onInputnumOnly(i+'quty',$event)" (keyup)="onInputnumOnly(i+'quty',$event)">
+                </td>
+                <td>
+                  <input type="text" id="{{i}}pric_unit" formControlName="price_unit" class="form-control" style="text-align: right" placeholder="Price/Unit"
+                    required (focus)="onSelectpriceunit(i+'pric_unit')" (change)="onInputnumOnly(i+'pric_unit',$event)" (keyup)="onInputnumOnly(i+'pric_unit',$event)">
+                </td>
+                <td>
+                  <input type="text" formControlName="amount" class="form-control text-right" placeholder="Amount" (change)="setAmount()" [value]="amount[i]"
+                    required readonly>
+                </td>
+                <td class="text-center">
+                  <button type="button" class="btn btn-light btn-sm" style="border: 1px solid red; border-radius: 50px" (click)="onremoveList(i)">
+                    <i class="fas fa-minus text-danger"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tbody formGroupName="total">
+              <tr>
+                <td rowspan="3" style="border: none">
+                  <!-- Ship to: -->
+                </td>
+                <td colspan="2" rowspan="3" style="border: none; align-content: center">
+                  <!-- <textarea class="form-control" placeholder="Address Detail..." cols="50" rows="5"></textarea> -->
+                </td>
+                <td colspan="2" class="text-right" style="vertical-align: middle;">
+                  Sub Total
+                </td>
+                <td colspan="2">
+                  <input type="text" formControlName="subTotal" class="form-control text-right" readonly>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="text-right" style="vertical-align: middle;">
+                  VAT 7%
+                </td>
+                <td colspan="2">
+                  <input type="text" formControlName="vat" class="form-control text-right" readonly>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="text-right" style="vertical-align: middle;">
+                  TOTAL
+                </td>
+                <td colspan="2">
+                  <input type="text" formControlName="Total" class="form-control text-right" readonly>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table table-borderless noselect">
+            <tbody>
+              <tr>
+                <th scope="row">Bill To Address</th>
+                <td colspan="2" width="80%">
+                  <textarea type="text" class="form-control" placeholder="avesta Company Limited." rows="4" required></textarea>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Comment</th>
+                <td>
+                  <input type="text" class="form-control" placeholder="Terms: CASH" required>
+                </td>
+                <td rowspan="2" class="text-center" width="40%">
+                  <a class="form-control" style="margin-top: 20px;"> {{license}} </a>
+                  <a class="form-control"> {{date_license}} </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                </td>
+                <td>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </form>
+
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-warning" (click)="onEdit()">Edit</button>
+        <button type="button" class="btn btn-secondary" (click)="onClose()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

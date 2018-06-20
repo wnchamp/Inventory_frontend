@@ -1,0 +1,42 @@
+<div class="modal fade" id="returnModalselect" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="defectModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-reply"></i>เลือกการคืน</a>
+        <button type="button" class="close" aria-label="Close" (click)="onClose()">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <table *ngIf="data_br.length > 0" class="table" id="borrowTable">
+            <thead>
+              <tr class="text-left">
+                <th>รหัสการยืม</th>
+                <th>ชื่ออุปกรณ์</th>
+                <th>ชื่อพนักงาน</th>
+                <th>บาร์โค้ด</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of data_br">
+                <td>{{data.bo_id}}</td>
+                <td>{{data.st_name}}</td>
+                <td>{{data.fullname}}</td>
+                <td>{{data.barcode | barcode}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center" *ngIf="data_br.length > 0">
+        <button type="submit" class="btn btn-primary" (click)="onSave()">บันทึก</button>
+        <button type="button" class="btn btn-secondary" (click)="onClose()">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+</div>

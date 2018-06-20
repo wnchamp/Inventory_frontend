@@ -1,0 +1,29 @@
+<div class="modal fade" id="categarModalmove" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-undo-alt"></i> กู้คืน</a>
+        <button type="button" class="close" aria-label="Close" (click)="onClose()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <form>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="form-group">
+              <a>ชื่อหมวดหมู่ : "{{name | uppercase}}"</a>
+              <br>
+              <br>
+              <h4>ยืนยันการกู้คืน !!!</h4>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="submit" class="btn btn-danger" (click)="onConfirm()">กู้คืน</button>
+          <button type="button" class="btn btn-secondary" (click)="onClose()">ยกเลิก</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

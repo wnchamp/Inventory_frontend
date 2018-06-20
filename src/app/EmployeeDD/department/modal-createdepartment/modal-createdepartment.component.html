@@ -1,0 +1,57 @@
+<div class="modal fade" id="ModalCreateDepartment" data-backdrop="static" aria-labelledby="ModalCreateDepartmentTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a>
+          <i class="fas fa-plus-circle"></i> เพิ่ม แผนก</a>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="OnClose()">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="FormCreate" (submit)="OnCreate()">
+          <div class="container-fluid">
+            <div class="form-group d-flex justify-content-center">
+              <input class="form-control-lg" type="text" placeholder="เบอร์โทร แผนก" formControlName="department_no" required minlength="3"
+                maxlength="15">
+            </div>
+            <!-- <div *ngIf="!FormCreate.controls['department_no'].valid && FormCreate.controls['department_no'].touched" class="alert alert-danger ">
+              <p> ใส่เลข 0-9 เท่านั้น !!</p>
+            </div> -->
+            <div *ngIf="this.FormCreate.controls['department_no'].dirty && this.FormCreate.controls['department_no'].errors?.required" class="container-fluid d-flex justify-content-center alert alert-danger">
+              กรุณากรอกเบอร์โทรแผนก!
+            </div>
+            <div *ngIf="this.FormCreate.controls['department_no'].errors?.minlength" class="container-fluid d-flex justify-content-center alert alert-danger">
+              กรุณาใส่เบอร์โทรแผนก อย่างน้อย 3 ตัวอักษร!
+            </div>
+            <div *ngIf="this.FormCreate.controls['department_no'].errors?.pattern" class="container-fluid d-flex justify-content-center alert alert-danger">
+              กรุณาใส่เบอร์โทรแผนก ด้วยตัวเลข 0-9 เท่านั้น!
+            </div>
+            <div class="form-group d-flex justify-content-center">
+              <input class="form-control-lg" type="text" placeholder="ชื่อแผนก" formControlName="department_name" required minlength="3"
+                maxlength="100">
+            </div>
+            <!-- <div *ngIf="!FormCreate.controls['department_name'].valid && FormCreate.controls['department_name'].touched" class="alert alert-danger ">
+              <p>ใส่ A-Z a-z เท่านั้น !!</p>
+            </div> -->
+            <div *ngIf="this.FormCreate.controls['department_name'].dirty && this.FormCreate.controls['department_name'].errors?.required" class="container-fluid d-flex justify-content-center alert alert-danger">
+              กรุณากรอกชื่อแผนก!
+            </div>
+            <div *ngIf="this.FormCreate.controls['department_name'].errors?.minlength" class="container-fluid d-flex justify-content-center alert alert-danger">
+              กรุณาใส่ชื่อแผนก อย่างน้อย 3 ตัวอักษร!
+            </div>
+            <div *ngIf="this.FormCreate.controls['department_name'].errors?.pattern" class="container-fluid d-flex justify-content-center alert alert-danger">
+              กรุณาใส่ชื่อแผนก ด้วยตัวอักษร a-z A-Z 0-9 เท่านั้น!
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button type="submit" class="btn btn-success" [disabled]="!FormCreate.valid">เพิ่ม</button>
+            <button type="button" class="btn btn-secondary" (click)="OnClose()">ยกเลิก</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

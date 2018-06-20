@@ -1,0 +1,32 @@
+<div class="modal fade" id="modalConfirmReturn" aria-labelledby="borrowDeleteModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-reply"></i> การคืน</a>
+        <button type="button" class="close" (click)="close()" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="form-group" *ngIf="data">
+            <a class="text-alert">
+              <h5>รหัส สต๊อก: "{{data.st_id}}"</h5>
+            </a>
+            <a class="text-alert">
+              <h5>ชื่อสต๊อก: "{{data.st_name}}"</h5>
+            </a>
+            <a>
+              <h4>ยืนยันการคืน ?</h4>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-primary" (click)="returnItem()">ยืนยัน</button>
+        <button type="button" class="btn btn-secondary" (click)="close()">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+</div>

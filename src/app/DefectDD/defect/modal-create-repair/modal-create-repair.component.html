@@ -1,0 +1,93 @@
+<div class="modal fade" id="modalCreaterepair" data-backdrop="static" data-keyboard="false" aria-labelledby="modalCreateDefect"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-wrench"></i> Select Repair</a>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div *ngIf="data_detail">
+            <table class="table table-bordered table-hover">
+              <tbody>
+                <tr>
+                  <td class="c1">
+                    <span>รหัส อุปกรณ์ชำรุด</span>
+                  </td>
+                  <td class="c2">{{data_detail.de_id}}</td>
+                </tr>
+                <tr>
+                  <td class="c1">
+                    <span>รหัสอุปกรณ์</span>
+                  </td>
+                  <td class="c2">{{data_detail.st_id}}</td>
+                </tr>
+                <tr>
+                  <td class="c1">
+                    <span>ชื่ออุปกรณ์</span>
+                  </td>
+                  <td class="c2">{{data_detail.st_name}}</td>
+                </tr>
+                <tr>
+                  <td class="c1">
+                    <span>รายละเอียด</span>
+                  </td>
+                  <td class="c2">{{data_detail.description}}</td>
+                </tr>
+                <tr>
+                  <td class="c1">
+                    <span>สถานะ</span>
+                  </td>
+                  <td class="c2" [ngClass]="{'text-danger':data.reair_status_id == 'DF',
+                      'text-warning':data.reair_status_id == 'RP',
+                      'text-success':data.reair_status_id == 'RF'}">{{data_detail.status_defect}}</td>
+                </tr>
+                <tr>
+                  <td class="c1">
+                    <span>ซีเรียลนัมเบอร์</span>
+                  </td>
+                  <td class="c2">{{data_detail.serial_no}}</td>
+                </tr>
+                <tr>
+                  <td class="c1">
+                    <span>บาร์โค้ด</span>
+                  </td>
+                  <td class="c2">{{data_detail.barcode | barcode}}
+                    <hr style="width: 100%">
+                    <ngx-barcode [bc-element-type]="elementType" [bc-value]="data_detail.barcode" [bc-format]="format" [bc-display-value]="displayValue"
+                      [bc-height]="height" [bc-width]="width" style="text-align: center;"></ngx-barcode>
+                    <p class="text-barcode">{{data_detail.barcode | barcode}} </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <form [formGroup]="form">
+            <div class="form-group d-flex justify-content-center">
+              <textarea class="form-group" placeholder="รายละเอียด..." cols="30" rows="5" formControlName="description" minlength="3"
+                maxlength="250" required>
+                </textarea>
+            </div>
+            <div *ngIf="this.form.controls['description'].errors?.pattern" class="d-flex justify-content-center alert alert-danger">
+              Please enter thai or english characters and number 0-9 only!
+            </div>
+            <div *ngIf="this.form.controls['description'].errors?.required" class="d-flex justify-content-center alert alert-danger">
+              Please enter any description!
+            </div>
+            <div *ngIf="this.form.controls['description'].errors?.minlength" class="d-flex justify-content-center alert alert-danger">
+              กรุณากรอกข้อมูลอย้างน้อย 3 ตัวอักษร !!!
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-primary" [disabled]="this.form.invalid" (click)="onSave()">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

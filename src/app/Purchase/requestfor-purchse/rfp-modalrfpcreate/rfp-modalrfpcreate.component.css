@@ -1,0 +1,89 @@
+.modal-header {
+    font-size: 25px;
+    color: white;
+    background-color: #424242;
+}
+
+.fas {
+    color: white;
+}
+
+.text-avesta {
+    cursor: default;
+    font-size: 30px;
+}
+
+.text-right {
+    cursor: default;
+    outline: none;
+    box-shadow: none !important;
+}
+
+.modal-footer button {
+    font-size: 20px;
+    width: 25%;
+}
+
+.text-page {
+    width: 80px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.text-page:hover {
+    background: white;
+}
+
+.btn-light {
+    border: 1px solid black;
+}
+
+.btn-light:disabled {
+    border: 1px solid gray;
+}
+
+.btn-nextprev {
+    width: 80px;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+}
+
+.text-po {
+    text-align: center;
+    border: 1px solid black;
+    /* border-radius: 5px; */
+}
+
+.seach-page {
+    border: 1px solid gray;
+}
+
+.form-control {
+    border: none;
+    outline: none;
+    box-shadow: none !important;
+}
+
+.modal-create {
+    overflow-y: auto;
+}
+
+@media (min-width: 992px) {
+    .modal-lg {
+        max-width: 1200px;
+    }
+}

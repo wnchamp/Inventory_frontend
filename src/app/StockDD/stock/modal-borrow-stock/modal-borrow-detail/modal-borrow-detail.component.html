@@ -1,0 +1,90 @@
+<div class="modal fade " id="modalDetail" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a>
+          <i class="fas fa-info-circle"></i>รายละเอียด สต๊อก</a>
+        <button type="button" class="close text-light" (click)="closeModal()" aria-label="Close">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="data">
+          <table class="table table-bordered table-hover">
+            <tbody>
+              <tr>
+                <td class="c1"><span>รหัสสต๊อก</span></td>
+                <td class="c2">{{data.st_id}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>ชื่อสต๊อก</span></td>
+                <td class="c2">{{data.st_name}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>คำอธิบาย</span></td>
+                <td class="c2">{{data.description}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>Type name</span></td>
+                <td class="c2">{{data.type_name}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>Type ID</span></td>
+                <td class="c2">{{data.type_id}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>Brand name</span></td>
+                <td class="c2">{{data.brand_name}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>Brand ID</span></td>
+                <td class="c2">{{data.brand_id}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>Serial number</span></td>
+                <td class="c2">{{data.serial_no}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>Category name</span></td>
+                <td class="c2">{{data.category_name}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>Category ID</span></td>
+                <td class="c2">{{data.cate_id}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>ชื่อสถานะ</span></td>
+                <td class="c2">{{data.sta_name}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>Location</span></td>
+                <td class="c2">{{data.location}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>Create date</span></td>
+                <td class="c2">{{data.create_dt | date: 'dd-MM-yyyy HH:mm'}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>Update date</span></td>
+                <td class="c2">{{data.update_dt | date: 'dd-MM-yyy HH:mm'}}</td>
+              </tr>
+              <tr >
+                  <td class="c1"><span>บาร์โค้ด</span></td>
+                  <td class="c2" *ngIf="data">{{data.barcode | barcode}} <hr style="width: 100%">
+
+                    <ngx-barcode [bc-element-type]="elementType" [bc-value]="data.barcode" [bc-format]="format" [bc-display-value]="displayValue" [bc-height]="height" [bc-width]="width" style="text-align: center;"></ngx-barcode>
+                   <p class="text-barcode">{{data.barcode | barcode}}</p>
+                  </td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-primary " (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

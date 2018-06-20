@@ -1,0 +1,40 @@
+<div class="modal fade noselect" id="rfpModalstatus" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a>
+          <i class="fas fa-edit"></i> แก้ไขสถานะ ใบสั่งซื้อ</a>
+        <button type="button" class="close text-light" aria-label="Close" (click)="onClose()">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <form [formGroup]="form" *ngIf="data" (submit)="onSave()">
+        <div class="modal-body" class="d-flex justify-content-center">
+          <div style="width: 50%;margin: 30px;">
+            <a type="text">สถานะตอนนี้ : </a>
+            <input type="text" class="form-control noselect" formControlName="status_current" required>
+            <br>
+            <div *ngIf="statuscanChange == false">
+              <a type="text">สถานะที่ต้องการจะเปลี่ยน({{select_length}}) : </a>
+              <select id="status_next" class="form-control" formControlName="status_next" required>
+                <option *ngIf="data.status_id == 'CED'" value="BYG">กำลังดำเนินการสั่งซื้อ</option>
+                <option *ngIf="data.status_id == 'BYG'" value="PHD">สั่งซื้อเรียบร้อย</option>
+                <option *ngIf="data.status_id == 'BYG'" value="CED">ยกเลิกการสั่งซื้อ</option>
+              </select>
+            </div>
+            <div *ngIf="statuscanChange == true" class="alert alert-danger text-danger" role="alert">
+              ไม่สามารถแก้ไขสถานะนี้ได้
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="submit" class="btn btn-warning" [disabled]="data.status_id == 'PHD'">Change</button>
+          <button type="button" class="btn btn-secondary" (click)="onClose()">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

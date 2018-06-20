@@ -1,0 +1,57 @@
+<div class="modal fade " id="viewbarcode" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a>
+          <i class="fas fa-barcode"></i> แสดง บาร์โค้ด </a>
+        <button type="button" class="close text-light" (click)="close()" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-primary " (click)="print()" formtarget="_blank" style="text-align: center;margin-right: 20px;margin-top: 20px; padding-left: 10px;padding-right: 10px;">
+          <i class="fas fa-print"></i> พิมพ์ บาร์โค้ด</button>
+
+      </div>
+      <div class="modal-body" id="pdfview">
+
+        <table style="width: 100%;text-align: center;">
+          <thead>
+            <tr>
+              <th style="width: 50%">บาร์โค้ด</th>
+              <th>รายละเอียด</th>
+            </tr>
+          </thead>
+          <tbody >
+            <tr *ngFor="let i of stock_data">
+              <td>
+                <ngx-barcode [bc-element-type]="elementType" bc-value="{{i.barcode}}" [bc-format]="format" [bc-line-color]="lineColor"
+                  [bc-width]="width" [bc-height]="height" [bc-display-value]="displayValue" [bc-font-options]="fontOptions"
+                  [bc-font]="font" [bc-text-align]="textAlign" [bc-text-position]="textPosition" [bc-text-margin]="textMargin"
+                  [bc-font-size]="fontSize" [bc-background]="background" [bc-margin]="margin" [bc-margin-top]="marginTop" [bc-margin-bottom]="marginBottom"
+                  [bc-margin-left]="marginLeft" [bc-margin-right]="marginRight">
+                </ngx-barcode>
+                <p class="text-barcode">{{i.barcode | barcode}}</p>
+
+              </td>
+              <td class="des-bar">
+                ชื่อ อุปกรณ์ : {{i.st_name}}
+                <br> ชนิด อุปกรณ์ : {{i.type_name}}
+                <br> ซีเรียลนัมเบอร์ : {{i.serial_no}}
+              </td>
+            </tr>
+          </tbody>
+
+
+        </table>
+
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-secondary " (click)="close()">ปิด</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end create stock modal -->

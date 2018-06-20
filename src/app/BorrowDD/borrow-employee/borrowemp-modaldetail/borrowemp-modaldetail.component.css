@@ -1,0 +1,57 @@
+.modal-header {
+    cursor: default;
+    font-size: 25px;
+    color: white;
+    background-color: #424242;
+}
+
+.dropdown-item, .fa-align-justify {
+    cursor: pointer;
+}
+
+.fas {
+    color: white;
+}
+
+.d-flex button {
+    width: 20%;
+}
+
+.modal-footer button {
+    font-size: 20px;
+    width: 30%;
+}
+
+th, td {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+th {
+    border-bottom: 2px solid #bdbdbd;
+}
+
+tbody tr {
+    box-shadow: 3px 3px 3px #bdbdbd;
+}
+
+tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 4px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+table {
+    width: 100%;
+}
+
+@media print {
+    .modal {
+        display: none;
+    }
+}

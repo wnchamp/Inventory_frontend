@@ -1,0 +1,66 @@
+<div class="modal fade " id="modalDetailReturn" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a>
+          <i class="fas fa-info-circle"></i> รายละเอียดการยืม</a>
+        <button type="button" class="close text-light" (click)="closeModal()" aria-label="Close">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="sData">
+          <table class="table table-bordered table-hover">
+            <tbody>
+              <tr>
+                <td class="c1"><span>กหัสการยืม</span></td>
+                <td class="c2">{{sData.bo_id}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>รหัสอุปกรณ์</span></td>
+                <td class="c2">{{sData.st_id}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>ชื่ออุปกรณ์</span></td>
+                <td class="c2">{{sData.st_name}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>ซีเรียลนัมเบอร์</span></td>
+                <td class="c2">{{sData.serial_no}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>สถานะ</span></td>
+                <td class="c2">{{sData.sta_br_name}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>ผู้ยืม</span></td>
+                <td class="c2">{{sData.fullname}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>รหัสพนักงาน</span></td>
+                <td class="c2">{{sData.employee_id}}</td>
+              </tr>
+              <tr>
+                <td class="c1"><span>วันที่ยืม</span></td>
+                <td class="c2">{{sData.borrow_dt | date: 'dd-MM-yyy HH:mm'}}</td>
+              </tr>
+              <tr>
+                  <td class="c1"><span>บาร์โค้ด</span></td>
+                  <td class="c2">{{sData.barcode | barcode}} <hr style="width: 100%">
+
+                    <ngx-barcode [bc-element-type]="elementType" [bc-value]="sData.barcode" [bc-format]="format" [bc-display-value]="displayValue" [bc-height]="height" [bc-width]="width" style="text-align: center;"></ngx-barcode>
+                  <p class="text-barcode">{{sData.barcode | barcode}}</p>
+                  </td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-primary " (click)="closeModal()">ปิด</button>
+      </div>
+    </div>
+  </div>
+</div>

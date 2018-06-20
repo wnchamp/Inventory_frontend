@@ -1,0 +1,68 @@
+<div class="modal fade" id="returnModal" data-backdrop="static" data-keyboard="false" aria-labelledby="returnModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-reply"></i> คืน อุปกรณ์</a>
+        <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form [formGroup]="form">
+            <div class="form-group container-fluid d-flex justify-content-center">
+              <input formControlName="barcode" type="text" placeholder="บาร์โค้ด" class="form-control-lg" (keyup.enter)="addBarcode()" minlength="10"
+                maxlength="20" required>
+              <button type="button" class="btn btn-success form-control-lg" (click)="addBarcode()" [disabled]="form.invalid">เพิ่ม</button>
+            </div>
+            <div class=" container-fluid d-flex justify-content-center">
+              <div *ngIf="this.form.controls['barcode'].errors?.pattern" class="alert alert-danger">
+                กรุณาใส่ตัวเลข  0-9  เท่านั้น !
+              </div>
+            </div>
+            <div class=" container-fluid d-flex justify-content-center">
+              <div *ngIf="this.form.controls['barcode'].errors?.minlength" class="alert alert-danger">
+                กรุณาใส่ตัวเลข 10 ตัวขึ้นไป !
+              </div>
+            </div>
+          </form>
+          <br>
+          <div class="d-flex justify-content-center">
+            <table *ngIf="stockData.length > 0" class="table">
+              <thead>
+                <tr>
+                  <th class="text-center">รหัสการยืม</th>
+                  <th>ชื่อ อุปกรณ์</th>
+                  <th>ชื่อ พนักงาน</th>
+                  <th>สถานะ</th>
+                  <th class="text-center">ฟังก์ชั่น</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of stockData">
+                  <td class="text-center">{{data.bo_id}}</td>
+                  <td>{{data.st_name}}</td>
+                  <td>{{data.fullname}}</td>
+                  <td>{{data.sta_br_name}}</td>
+                  <td class="text-center">
+                    <button type="button" class="btn btn-primary" (click)="addRowData(data.bo_id,data.barcode)">+</button>
+                    <button type="button" class="btn btn-secondary" (click)="openDetailModal(data)">i</button>
+                    <button type="button" class="btn btn-danger" (click)="removeRow(data.barcode)">x</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center" *ngIf="stockData.length > 0">
+          <button type="button" class="btn btn-primary" (click)="onSave()">บันทึก</button>
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">ยกเลิก</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-modal-detail-return [mStat]="mDetailStat" [sData]="detail_data" (c)="close($event)"></app-modal-detail-return>

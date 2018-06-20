@@ -1,0 +1,39 @@
+.modal-header {
+    cursor: default;
+    font-size: 25px;
+    color: white;
+    background-color: #424242;
+}
+
+.fas {
+    color: white;
+}
+
+.modal-footer button {
+    font-size: 20px;
+    width: 30%;
+}
+
+.form-control-lg {
+    border: 1px solid gray;
+    width: 50%;
+    font-size: 20px;
+}
+
+.select-dep {
+    size: 5;
+    overflow-y: scroll;
+}
+
+span {
+    color: black;
+    font-weight: bold;
+}
+
+.c1 {
+    width: 20%;
+}
+
+.c2 {
+    width: 80%;
+}

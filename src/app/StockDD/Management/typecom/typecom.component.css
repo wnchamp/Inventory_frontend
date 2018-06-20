@@ -1,0 +1,253 @@
+i, a {
+    cursor: pointer;
+}
+
+.header .text-header {
+    cursor: default;
+    font-size: 25px;
+}
+
+.text-page {
+    width: 80px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.text-page:hover {
+    background: white;
+}
+
+.btn-light {
+    border: 1px solid black;
+}
+
+.btn-light:disabled {
+    border: 1px solid gray;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+}
+
+.text-notfound, .alert {
+    cursor: default;
+    font-size: 20px;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid gray;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.create button {
+    color: white;
+    background-color: rgb(15, 55, 63);
+    border: 1px solid black;
+}
+
+.create button:hover {
+    background-color: white;
+    color: black;
+}
+
+.search button {
+    color: black;
+    background: white;
+    border: 1px solid black;
+}
+
+.search button:hover {
+    background: rgb(15, 55, 63);
+    color: white;
+}
+
+th, td {
+    cursor: default;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+th {
+    border-bottom: 1px solid #bdbdbd;
+}
+
+tbody tr {
+    box-shadow: 1px 1px 3px #bdbdbd;
+}
+
+tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 4px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.filter-search {
+    width: 120px;
+    border: 1px solid rgb(126, 126, 126);
+    border-radius: 3px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 56px;
+    height: 30px;
+    margin-bottom: 0;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 23px;
+    width: 23px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+
+.mat-header-cell.mat-sort-header-sorted {
+    color: black;
+}
+
+.mat-select {
+    width: 0%;
+}
+
+.mat-header-cell {
+    margin-left: 0px;
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.mat-cell {
+    margin-left: 0px;
+    color: #212529;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.text-centers {
+    margin-left: 10%;
+}
+
+.text-margin-left-category-header {
+    margin-left: 2%;
+}
+
+.text-margin-left-category {
+    margin-left: 3%;
+}
+
+.text-margin-left-dashboard-header {
+    margin-left: 2%;
+}
+
+.text-margin-left-dashboard {
+    margin-left: 5.5%;
+}
+
+.text-margin-left-action-header {
+    margin-left: 2%;
+}
+
+.text-margin-left-action {
+    margin-left: 3%;
+}
+
+.mat-row {
+    /* box-shadow: 1px 1px 3px #bdbdbd; */
+}
+
+.mat-row:hover {
+    background-color: #f5f5f5;
+}
+
+.mat-header-row {
+  box-shadow: 0px 3px 0px #bdbdbd;
+}
+
+.alert {
+    font-size: 15px;
+    width: auto;
+    text-align: center;
+}
+
+input[type=search].form-control {
+    width: 300px;
+}
+
+input[type="search"].form-control::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
+    width: 300px;
+    cursor: pointer;
+}

@@ -1,0 +1,37 @@
+<div class="modal fade" id="modalEditDefect" data-backdrop="static" data-keyboard="false" aria-labelledby="modalEditDefect"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-edit"></i> แก้ไขรายละเอียดการซ่อม</a>
+        <button type="button" class="close" (click)="onClose()" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <form [formGroup]="form" (submit)="onSave()">
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="form-group d-flex justify-content-center">
+              <textarea formControlName="description" placeholder="รายละเอียด" cols="30" rows="5" minlength="3" maxlength="30" required></textarea>
+            </div>
+            <div *ngIf="this.form.controls['description'].errors?.required" class="d-flex justify-content-center alert alert-danger">
+              กรุณากรอกรายละเอียด
+            </div>
+            <div *ngIf="this.form.controls['description'].errors?.minlength" class="d-flex justify-content-center alert alert-danger">
+              กรุณากรอกข้อมูล อย่างน้อย 3 ตัวอักษร
+            </div>
+            <div *ngIf="this.form.controls['description'].errors?.pattern" class="d-flex justify-content-center alert alert-danger">
+
+              กรุณากรอกข้อมูลด้วย ก-ฮ, a-z, A-Z และ 0-9 เท่านั้น !
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <!-- <button type="submit" class="btn btn-primary" [disabled]="form.pristine && form.value.description == checkOldtext" >Save change</button> -->
+          <button type="submit" class="btn btn-primary" [disabled]="this.form.invalid">บันทึก</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

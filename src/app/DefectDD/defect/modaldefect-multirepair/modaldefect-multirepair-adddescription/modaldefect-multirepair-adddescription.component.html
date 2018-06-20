@@ -1,0 +1,36 @@
+<div class="modal fade" id="modalDefectmultiAdddes" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-content-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-cogs"></i> Add รายละเอียด</a>
+        <button type="button" class="close" (click)="onClose()" aria-label="Close">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <form [formGroup]="form">
+        <div class="modal-body">
+          <div class="form-group d-flex justify-content-center">
+            <textarea formControlName="description" placeholder="รายละเอียด ....." cols="30" rows="5" minlength="3" maxlength="250"
+              required></textarea>
+          </div>
+          <div *ngIf="this.form.controls['description'].errors?.required" class="d-flex justify-content-center alert alert-danger">
+            Please enter any description!
+          </div>
+          <div *ngIf="this.form.controls['description'].errors?.minlength" class="d-flex justify-content-center alert alert-danger">
+            กรุณากรอกข้อมูลอย้างน้อย 3 ตัวอักษร !!!
+          </div>
+          <div *ngIf="this.form.controls['description'].errors?.pattern" class="d-flex justify-content-center alert alert-danger">
+            Please enter thai or english and number 0-9 only!
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="button" class="btn btn-primary" [disabled]="this.form.invalid" (click)="onSave()">บันทึก</button>
+          <button type="button" class="btn btn-secondary" (click)="onClose()">ยกเลิก</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,156 @@
+<div *ngIf="type_data" class="container-fluid">
+  <br>
+  <div class="header">
+    <a class="text-header">สต๊อก / ชนิด อุปกรณ์</a>
+  </div>
+  <hr>
+
+  <form [formGroup]="form">
+    <div class="form-group form-inline justify-content-between">
+      <div class="create">
+        <button type="button" class="btn" (click)="openCreateodal()">
+          <i class="fas fa-plus-circle"></i> เพิ่ม
+        </button>
+      </div>
+      <div class="search">
+        <select class="form-control filter-search" formControlName="search_by" (change)="getType()">
+          <option [value]="'all'">ทั้งหมด</option>
+          <option [value]="'type_name'">ชนิด อุปกรณ์</option>
+          <option [value]="'cate_name'">หมวดหมู่ อุปกรณ์</option>
+        </select>
+        <input class="form-control" type="search" placeholder="ค้นหา" formControlName="search" (keyup.enter)="checkErrors()" (keyup)="checkEmpty()">
+        <button type="button" [disabled]="this.form.invalid" class="btn" (click)="getType()">
+          <i style="cursor: auto" class="fas fa-search"></i> ค้นหา</button>
+      </div>
+    </div>
+    <div class="justify-content-center">
+      <div class="row">
+        <div class="col-7"></div>
+        <div class="col-5">
+          <div *ngIf="this.form.controls['search'].errors?.pattern" class="alert alert-danger">
+            ค้นหาด้วยตัวอักษร ก-ฮ a-z A-Z 0-9 เท่านั้น!
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="dropdown d-flex justify-content-end">
+      <div class="form-group">
+        <select class="form-control-sm" formControlName="numrow" (change)="getType()">
+          <option [value]="5">5 แถว</option>
+          <option [value]="10">10 แถว</option>
+          <option [value]="20">20 แถว</option>
+        </select>
+      </div>
+    </div>
+  </form>
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="type_name">
+      <mat-header-cell class="text-centers" *matHeaderCellDef mat-sort-header> ชนิด อุปกรณ์ </mat-header-cell>
+      <mat-cell class="text-centers" *matCellDef="let element"> {{element.type_name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="category_name">
+      <mat-header-cell class="text-margin-left-category-header" *matHeaderCellDef mat-sort-header> หมวด อุปกรณ์ </mat-header-cell>
+      <mat-cell class="text-margin-left-category" *matCellDef="let element"> {{element.category_name}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="type_display">
+      <mat-header-cell class="text-margin-left-dashboard-header" *matHeaderCellDef mat-sort-header> แสดง แดชบอร์ด </mat-header-cell>
+      <mat-cell class="text-margin-left-dashboard" *matCellDef="let element">
+        <label class="switch">
+          <input type="checkbox" [checked]="element.type_display == '1'" (click)="switchDisplay(element.type_id)">
+          <span class="slider round"></span>
+        </label>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell class="text-center text-margin-left-action-header" *matHeaderCellDef> ฟังก์ชั่น </mat-header-cell>
+      <mat-cell class="text-center" *matCellDef="let element">
+
+        <i class="fas fa-align-justify text-dark" [matMenuTriggerFor]="menu"></i>
+
+        <mat-menu mat-button #menu="matMenu">
+          <mat-list-item>
+            <button mat-menu-item (click)="openEditModal(element.cate_id,element.type_id,element)">
+              <i class="fas fa-edit"></i> แกไข้
+            </button>
+          </mat-list-item>
+          <mat-list-item>
+            <button mat-menu-item (click)="openDeleteModal(element.type_id,element.type_name)">
+              <i class="fas fa-trash"></i> ลบ
+            </button>
+          </mat-list-item>
+        </mat-menu>
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <div class="alert alert-danger " role="alert" *ngIf="type_data.length == 0 && search_nf">
+    <br>
+    <div class="d-flex justify-content-center">
+      <a class="alert-heading text-notfound"> ไม่พบข้อมูล "{{search_nf}}"</a>
+    </div>
+    <hr>
+    <div class="d-flex justify-content-center">
+      <a class="text-notfound">ค้นหาด้วย by "ชนิด อุปกรณ์", "หมวดหมู่ อุปกรณ์"</a>
+    </div>
+    <br>
+  </div>
+  <div class="alert alert-danger " role="alert" *ngIf="type_data.length == 0 && !search_nf">
+    <br>
+    <div class="d-flex justify-content-center">
+      <a class="alert-heading text-notfound">ไม่พบข้อมูลในฐานข้อมูล</a>
+    </div>
+    <br>
+  </div>
+
+  <br>
+  <nav aria-label="Page navigation example">
+    <ul class="form-inline pagination justify-content-end">
+      <a class="page-link noselect text-page" style="cursor: default;">หน้า: {{setPage}}
+      </a>
+    </ul>
+  </nav>
+  <nav aria-label="Page navigation example" *ngIf="type_data.length > 0">
+    <ul class="pagination justify-content-end">
+      <li class="page-item" style="padding-right: 5px;" *ngIf="navPage.length > 1">
+        <button type="button" class="btn btn-light" (click)="previoustabPage()" [disabled]="countPage[0] == 1">
+          <i class="fas fa-angle-double-left"></i>
+        </button>
+      </li>
+      <li class="page-item" style="padding-right: 1px;">
+        <button type="button" class="btn btn-light btn-nextprev" (click)="previousPage()" [disabled]="setPage == 1">
+          <i class="fas fa-caret-left"></i> ก่อนหน้า
+        </button>
+      </li>
+      <li class="page-item" *ngFor="let i of countPage" style="width: 40px;text-align: center">
+        <a class="page-link noselect" (click)="selectPage(i)" [ngClass]="{'text-light':setPage == i,'bg-dark':setPage == i}">{{i}}</a>
+      </li>
+      <li class="page-item" style="padding-left: 1px;">
+        <button type="button" class="btn btn-light btn-nextprev" (click)="nextPage()" [disabled]="setPage == checkdisBut">
+          ถัดไป
+          <i class="fas fa-caret-right"></i>
+        </button>
+      </li>
+      <li class="page-item" style="padding-left: 5px;" *ngIf="navPage.length > 1">
+        <button type="button" class="btn btn-light" (click)="nexttabPage()" [disabled]="countPage[countPage.length-1] == checkdisBut">
+          <i class="fas fa-angle-double-right"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <app-typecreatemodal [statusModal]="statcreate_type" (close)="closeModal($event)"></app-typecreatemodal>
+  <app-typeeditmodal [statusModal]="statedit_type" [id_cate]="id_cate" [id_type]="id_type" [data_type]="dataedit" (close)="closeModal($event)"></app-typeeditmodal>
+  <app-typedeletemodal [statModal]="statdelete_type" [idDelete]="id_type" [nametype]="namedeletetype" (close)="closeModal($event)"></app-typedeletemodal>
+
+</div>

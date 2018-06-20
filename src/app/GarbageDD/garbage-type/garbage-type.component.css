@@ -1,0 +1,142 @@
+i, a {
+    cursor: pointer;
+}
+
+.header .text-header {
+    cursor: default;
+    font-size: 25px;
+}
+
+.text-page {
+    width: 80px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.text-page:hover {
+    background: white;
+}
+
+.btn-light {
+    border: 1px solid black;
+}
+
+.btn-light:disabled {
+    border: 1px solid gray;
+}
+
+.btn-nextprev {
+    width: 80px;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid gray;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.create button {
+    color: white;
+    background-color: #424242;
+    border: 1px solid black;
+}
+
+.create button:hover {
+    background-color: white;
+    color: black;
+}
+
+.search button {
+    color: black;
+    background: white;
+    border: 1px solid black;
+}
+
+.search button:hover {
+    background: rgb(15, 55, 63);
+    color: white;
+}
+
+th, td {
+    cursor: default;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+th {
+    border-bottom: 1px solid #bdbdbd;
+}
+
+tbody tr {
+    box-shadow: 1px 1px 3px #bdbdbd;
+}
+
+tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 4px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.mat-header-cell {
+    margin-left: 10%;
+    color: #000;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.mat-cell {
+    margin-left: 10%;
+    color: #212529;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.mat-row {
+    /* box-shadow: 1px 1px 3px #bdbdbd; */
+}
+
+.mat-row:hover {
+    background-color: #f5f5f5;
+}
+
+.mat-header-row {
+  box-shadow: 0px 3px 0px #bdbdbd;
+}
+
+.alert {
+    font-size: 15px;
+    text-align: center;
+}
+
+input[type=search].form-control {
+    width: 300px;
+}
+
+input[type="search"].form-control::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
+    cursor: pointer;
+}

@@ -1,0 +1,112 @@
+<div class="modal fade" id="borrowModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="defectModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a *ngIf="!empID" class="modal-title">
+          <i class="fas fa-hands"></i> เพิ่ม รายการยืม</a>
+        <a *ngIf="empID">
+          <i class="fas fa-hands"></i> Create borrow {{empID}}</a>
+        <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="form">
+          <div *ngIf="!empID" class="form-group container-fluid d-flex justify-content-center">
+            <input formControlName="emp_id" type="text" (keyup.enter)="searchEmp()" placeholder="คนหาจากชื่อพนักงาน" class="form-control-lg"
+              minlength="1" maxlength="20" required>
+            <button type="button" class="btn btn-success form-control-lg" (click)="searchEmp()" [disabled]="form.invalid">ค้นหา</button>
+          </div>
+          <span *ngIf="this.form.controls['emp_id'].errors?.pattern" class="container-fluid d-flex justify-content-center alert alert-danger">
+            กรุณากรอกข้อมูลด้วย ภาษาไทย หรือ ภาษาอังกฤษ และ ตัวเลข 1-9 เท่านั้น!
+          </span>
+          <span *ngIf="this.form.controls['emp_id'].errors?.minlength" class="container-fluid d-flex justify-content-center alert alert-danger">
+           กรุณากรอกข้อมูล
+          </span>
+        </form>
+        <br *ngIf="!empID">
+        <div *ngIf="empData.length > 0" class="d-flex justify-content-center">
+          <table *ngIf="!empID" class="table">
+            <thead>
+              <tr>
+                <th class="text-center">รหัสพนักงาน</th>
+                <th>ชื่อ</th>
+                <th>หน้าที่</th>
+                <th class="text-center">สถานะ</th>
+                <th class="text-center">ฟังก์ชั่น</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let emp of empData">
+                <td class="text-center">{{emp.emp_id}}</td>
+                <td>{{emp.first_name_en}} {{emp.last_name_en}}</td>
+                <td>{{emp.role_name}}</td>
+                <td class="text-center" [ngClass]="{'text-success': emp.user_status == 'ac',
+                'text-warning':emp.user_status == 'bo'}">{{emp.status_name}}</td>
+                <td class="text-center">
+                  <button class="btn btn-success" (click)="selectEmp(emp.emp_id)">เลือก</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <form [formGroup]="form">
+          <div *ngIf="empID" class="form-group container-fluid d-flex justify-content-center">
+            <input formControlName="barID" type="text" (keyup.enter)="addBarcode()" placeholder="บาร์โค้ด" class="form-control-lg" minlength="10"
+              maxlength="20" required>
+            <button type="button" class="btn btn-success form-control-lg" (click)="addBarcode()" [disabled]="form.invalid">เพิ่ม</button>
+          </div>
+          <div *ngIf="this.form.controls['barID'].errors?.pattern" class="conainer-fluid d-flex justify-content-center">
+            <span class="alert alert-danger">
+              กรุณากรอกข้อมูลเป็นตัวเลข 0-9 เท่านั้น !
+            </span>
+          </div>
+          <div *ngIf="this.form.controls['barID'].errors?.minlength" class="conainer-fluid d-flex justify-content-center">
+            <span class="alert alert-danger">
+              กรุณากรอกข้อมูลตัวเลข อย่างน้อย 10 ตัว!
+            </span>
+          </div>
+        </form>
+        <br *ngIf="empID">
+        <div *ngIf="stockData.length > 0" class="d-flex justify-content-center">
+          <table class="table" id="borrowTable">
+            <thead>
+              <tr>
+                <th class="text-center">รหัสอุปกรณ์</th>
+                <th>ชื่ออุปกรณ์</th>
+                <th>บาร์โค้ด</th>
+                <th class="text-center">สถานะ</th>
+                <th class="text-center">ฟังก์ชั่น</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of stockData">
+                <td class="text-center">{{data.st_id}}</td>
+                <td>{{data.st_name}}</td>
+                <td>{{data.barcode | barcode}}</td>
+                <td class="text-center" [ngClass]="{'text-success':data.status == 'ep',
+                'text-warning':data.status == 'bs'}">{{data.sta_name}}</td>
+                <td class="text-center">
+                  <button class="btn btn-primary" (click)="addRowData(data.st_id,data.barcode)">+</button>
+                  <button class="btn btn-secondary" (click)="openDetailModal(data)">i</button>
+                  <button class="btn btn-danger" (click)="removeRow(data.barcode)">x</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <div *ngIf="stockData.length > 0" class="modal-footer d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary" (click)="onSave()">บันทึก</button>
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-modal-borrow-detail [mStat]="mDetailStat" [sData]="st_detail" (c)="closeModal2($event)"></app-modal-borrow-detail>

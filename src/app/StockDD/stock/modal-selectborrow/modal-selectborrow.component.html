@@ -1,0 +1,90 @@
+<div class="modal fade" id="borrowModalselect" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="defectModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-hands"></i> เลือก เพิ่มการยืม</a>
+        <button type="button" class="close" aria-label="Close" (click)="onClose()">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="conatiner-fluid">
+          <form [formGroup]="form">
+            <div *ngIf="confirmStatus == false && stockStatus == 'bs'" class="alert-stockready-touse">
+              <h5>อุปกรณ์นี้ สามารถยืมได้.</h5>
+              <h5>กด "ยืนยัน" เพื่อเพิ่มรายการยืม</h5>
+            </div>
+            <div *ngIf="!data_empID && confirmStatus " class="form-group container-fluid d-flex justify-content-center">
+              <input type="text" placeholder="ค้นหา พนักงาน" class="form-control-lg" formControlName="search" (keyup.enter)="getEmp()">
+              <button type="button" class="btn btn-success" (click)="getEmp()" [disabled]="form.invalid">ค้นหา</button>
+            </div>
+            <div class=" container-fluid d-flex justify-content-center">
+              <div *ngIf="this.form.controls['search'].errors?.pattern" class="alert alert-danger">
+                กรุณาใส่ ก-ฮ, a-z, A-Z และ 0-9 เท่านั้น !!
+              </div>
+            </div>
+          </form>
+          <br>
+          <div class="d-flex justify-content-center">
+            <table *ngIf="data[0] && !data_empID" class="table">
+              <thead>
+                <tr class="text-center">
+                  <th>ชื่อ</th>
+                  <th>ชื่อเล่น</th>
+                  <th>แผนก</th>
+                  <th>สถานะ</th>
+                  <th>ฟังก์ชั่น</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-center" *ngFor="let emp of data">
+                  <td>{{emp.first_name_en}} {{emp.last_name_en}} </td>
+                  <td>{{emp.emp_nickname}} </td>
+                  <td>{{emp.dep_name}} </td>
+                  <td [ngClass]="{'text-success':emp.user_status == 'ac','text-warning':emp.user_status == 'bo'}">{{emp.status_name}} </td>
+                  <td>
+                    <button class="btn btn-success" (click)="onSelect(emp)">เลือก</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table *ngIf="data_empID" class="table" id="borrowTable">
+              <thead>
+                <tr class="text-center">
+                  <th>ชื่อ</th>
+                  <th>ชื่อเล่น</th>
+                  <th>แผนก</th>
+                  <th>สถานะ</th>
+                  <th>ฟังก์ชั่น</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-center">
+                  <td>{{name_emp}}</td>
+                  <td>{{nickname}} </td>
+                  <td>{{department}} </td>
+                  <td [ngClass]="{'text-success':status == 'Active','text-warning':status == 'Block'}">{{status}} </td>
+                  <td>
+                    <button class="btn btn-danger" (click)="onRemove()">x</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div *ngIf="confirmStatus == false && stockStatus == 'bs'" class="modal-footer d-flex justify-content-center">
+          <button type="button" class="btn btn-warning btn-confirm" (click)="onConfirm()">ยืนยัน</button>
+          <button type="button" class="btn btn-light  btn-confirm" (click)="onClose()">ยกเลิก</button>
+        </div>
+        <div *ngIf="data_empID" class="modal-footer d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary" (click)="onSave()">บันทึก</button>
+          <button type="button" class="btn btn-secondary" (click)="onClose()">ยกเลิก</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

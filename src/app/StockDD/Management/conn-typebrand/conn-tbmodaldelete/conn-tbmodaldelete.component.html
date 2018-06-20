@@ -1,0 +1,29 @@
+<div class="modal fade" id="tbDeleteModal" data-backdrop="static" data-keyboard="false" aria-labelledby="tbDeleteModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-trash"></i> ลบ ชนิด อุปกรณ์ & แบรนด์</a>
+        <button type="button" class="close" data-dismiss="modal" (click)="onClose()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="form-group">
+            <a>ชนิด อุปกรณ์ : "{{type}}"</a>
+            <br>
+            <a>แบรนด์ : "{{brand}}"</a>
+            <br>
+            <br>
+            <h4>ยืนยันการลบ ชนิดของอุปกรณ์ & แบรนด์นี้!!!</h4>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-danger" (click)="onDelete()">ลบ</button>
+        <button type="button" class="btn btn-secondary" (click)="onClose()">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+</div>

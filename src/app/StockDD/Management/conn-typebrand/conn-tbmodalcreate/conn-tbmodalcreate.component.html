@@ -1,0 +1,37 @@
+<div class="modal fade" id="tbModalcreate" aria-labelledby="cateCreateModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-plus-circle"></i> เพิ่ม ชนิด & แบรนด์ อุปกรณ์</a>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <br>
+      <form [formGroup]="form" (submit)="onCreate()">
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="form-group d-flex justify-content-center">
+              <select class="form-control-lg" formControlName="type" required>
+                <option disabled value="">เลือกชนิด อุปกรณ์</option>
+                <option *ngFor="let dataT of data_type" value="{{dataT.type_id}}">{{dataT.type_name}}</option>
+              </select>
+              <br>
+            </div>
+            <div class="form-group d-flex justify-content-center">
+              <select class="form-control-lg" formControlName="brand" required>
+                <option disabled value="">เลือก แบรนด์</option>
+                <option *ngFor="let dataB of data_brand" value="{{dataB.brand_id}}">{{dataB.brand_name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="submit" class="btn btn-success" [disabled]="form.invalid">เพิ่ม</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

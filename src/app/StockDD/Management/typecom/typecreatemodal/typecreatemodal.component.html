@@ -1,0 +1,49 @@
+<div class="modal fade" id="typeCreateModal" data-backdrop="static" data-keyboard="false" style="z-index: 1041">
+  <div class="modal-dialog modal-lg" style="z-index: 1041">
+    <div class="modal-content" style="z-index: 1041">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-plus-circle"></i> เพิ่ม</a>
+        <button type="button" class="close" (click)="Close()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <form [formGroup]="form" (submit)="onCreatetype()">
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="form-group d-flex justify-content-center">
+
+              <select class="form-control-lg" formControlName="cate" required>
+                <option value="">เลือก หมวดหมู่</option>
+                <option *ngFor="let data of data_cate" [value]="data.cate_id">{{data.category_name}} </option>
+              </select>
+            </div>
+            <div class="form-group d-flex justify-content-center">
+              <input class="form-control-lg" type="text" placeholder="type" formControlName="type" required minlength="3" maxlength="40">
+            </div>
+            <div class="container-fluid d-flex justify-content-center">
+              <div *ngIf="this.form.controls['type'].errors?.pattern" class="alert alert-danger">
+                กรุณาใช้ ก-ฮ, a-z, A-Z และ 0-9 เท่านั้น !
+              </div>
+            </div>
+            <div class="container-fluid d-flex justify-content-center">
+              <div *ngIf="this.form.controls['type'].errors?.minlength" class=" alert alert-danger ">
+                กรุณาใส่ข้อมูล อย่างน้อย 3 ตัวอักษร !
+              </div>
+            </div>
+            <div class="container-fluid d-flex justify-content-center">
+              <div *ngIf="this.form.controls['type'].dirty && this.form.controls['type'].errors?.required" class=" alert alert-danger ">
+                กรุณาใส่ ชนิดของอุปกรณ์ที่จะค้นหา !
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="submit" class="btn btn-success" [disabled]="form.invalid">เพิ่ม</button>
+          <button type="button" class="btn btn-secondary" (click)="Close()">ยกเลิก</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="modal fade" id="brandEditModal" data-backdrop="static" data-keyboard="false" aria-labelledby="brandEditModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-edit"></i> แก้ไข แบรนด์</a>
+        <button type="button" class="close" (click)="close()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <form [formGroup]="formEditBrand" (submit)="submitForm()">
+        <div class="modal-body">
+          <div class="container-fluid">
+            <br>
+            <div class="form-group d-flex justify-content-center">
+              <input class="form-control-lg" type="text" formControlName="brandName" placeholder="ใส่ ชื่อแบรนด์" required minlength="3" maxlength="30">
+            </div>
+            <div *ngIf="this.formEditBrand.controls['brandName'].errors?.required" class="container-fluid d-flex justify-content-center alert alert-danger">
+              กรุณาใส่ชื่อแบรนด์ เช่น iphone, acer !
+            </div>
+            <div *ngIf="this.formEditBrand.controls['brandName'].errors?.minlength" class="container-fluid d-flex justify-content-center alert alert-danger">
+              กรุณาใส่ข้อมูล 3 ตัวอักษรขึ้นไป !
+            </div>
+            <div *ngIf="this.formEditBrand.controls['brandName'].errors?.pattern" class="container-fluid d-flex justify-content-center alert alert-danger">
+              กรุณาใช้ ก-ฮ, A-Z, 0-9 เท่านั้น !
+            </div>
+            <br>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="submit" class="btn btn-warning" [disabled]="formEditBrand.invalid || formEditBrand.value.brandName == brand_Name">แก้ไข</button>
+          <button type="button" class="btn btn-secondary" (click)="close()">ยกเลิก</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

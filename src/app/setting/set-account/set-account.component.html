@@ -1,0 +1,21 @@
+<div class="card text-left">
+    <div class="card-header">
+        Change username
+        <i class="fas fa-lock"></i>
+    </div>
+    <div class="card-body">
+        <div class="form-group ">
+            <form [formGroup]="form">
+                <label for="account">New Username </label>
+                <input type="text" class="form-control" id="account" formControlName="account" placeholder="new usernanme..."><br>
+                <label for="rt-account">Re-type Username </label>
+                <input type="text" class="form-control" id="rt-account" formControlName="re_account" placeholder="retype usernanme...">
+            </form>
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+        <button class="btn btn-danger" style="float: right;margin-left:5px;" routerLink="/home/setting/profile"> Cancel </button>
+        <button class="btn btn-success" style="float: right;margin-left:5px;" (click)="OnSave()" [disabled]="!form.valid"> Save </button>
+
+    </div>
+</div>

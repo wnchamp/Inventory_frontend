@@ -1,0 +1,56 @@
+<br>
+<br>
+<div class="d-flex justify-content-center" style="font-size: 50px">Page Not Found</div>
+<br>
+<div class="d-flex justify-content-center">
+  <button type="button" class="btn btn-light text-danger" style="font-size: 40px; border: 1px solid black" routerLink="/home">
+    Go Home Now!!!</button>
+</div>
+<br>
+<br>
+<!-- // Test Autocomplete // -->
+
+<div class="d-flex justify-content-center">
+  <button mat-button class="btn" (click)="Time()">TIME!</button>
+</div>
+<div class="d-flex justify-content-center">
+  <div class="text"> {{oclock | date:'full'}}
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+
+  <form class="example-form">
+
+    <mat-form-field class="example-full-width">
+      <input type="text" placeholder="Select Type" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto"
+        md-min-length="0">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.type_name">
+          {{ option.type_name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <div class="d-flex justify-content-center"> {{textid}} </div>
+    <div class="d-flex justify-content-center"> {{textstr}} </div>
+
+    <button mat-button class="btn-block" (click)="onClick()">Open Chart!</button>
+  </form>
+</div>
+
+<div class="d-flex justify-content-center">
+  <div class="chart-size">
+    <canvas id="myChart"></canvas>
+  </div>
+</div>
+
+
+<div class="d-flex justify-content-center">
+  <button mat-button class="btn" (click)="onnewChart()">Open Char2t!</button>
+</div>
+<div class="d-flex justify-content-center">
+  <div class="chart-size">
+    <canvas id="newChart"></canvas>
+  </div>
+</div>

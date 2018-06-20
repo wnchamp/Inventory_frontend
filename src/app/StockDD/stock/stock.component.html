@@ -1,0 +1,257 @@
+<div class="container-fluid " id="testtest">
+  <br>
+  <div class="header no-print noselect">
+    <a class="text-header">สต๊อก / อุปกรณ์</a>
+  </div>
+  <hr class="no-print">
+  <form [formGroup]="form">
+    <div class="form-group form-inline justify-content-between no-print">
+      <div class="create noselect">
+        <button type="button" class="btn" (click)="openCreateModal()">
+          <i class="fas fa-plus-circle"></i> เพิ่ม
+        </button>
+      </div>
+      <div class="search noselect">
+        <select class="form-control filter-search" formControlName="filter">
+          <option value="al">ทั้งหมด</option>
+          <option value="category_name">หมวดหมู่</option>
+          <option value="type_name">ชนิด อุปกรณ์</option>
+          <option value="brand_name">แบรนด์</option>
+          <option value="st_name">ชื่อสต๊อก</option>
+        </select>
+        <input class="form-control" type="search" placeholder="ค้นหา" formControlName="search" (keyup)="checkEmpty()" (keyup.enter)="checkErrors()">
+        <button type="button" class="btn" [disabled]="form.invalid" (click)="getStock()">
+          <i style="cursor: auto" class="fas fa-search"></i> ค้นหา</button>
+      </div>
+    </div>
+    <div *ngIf="this.form.controls['search'].errors?.pattern">
+      <div class="row">
+        <div class="col-7"></div>
+        <div class="col-5">
+          <div class="alert alert-danger">
+            ค้นหาด้วยตัวอักษร ก-ฮ a-z A-Z 0-9 เท่านั้น!
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <br>
+  <div class="row no-print">
+    <div class="col-2">
+      <app-modal-borrow-stock [modalState]="borrowModalState" (c)="closeModal($event)"></app-modal-borrow-stock>
+      <button class="btn btn-action btn-light btn-block" (click)="openBorrowModal()">
+        <i class="fas fa-hands"></i> การยืม</button>
+    </div>
+    <div class="col-2">
+      <app-return-modal [modalState]="returnModalState" (c)="closeModal($event)"></app-return-modal>
+      <button class="btn btn-action btn-light btn-block" (click)="openReturnModal()">
+        <i class="fas fa-reply"></i> การคืน</button>
+    </div>
+    <div class="col-2">
+      <app-modal-defect-stock [modalState]="defectModalState" (c)="closeModal($event)"></app-modal-defect-stock>
+      <button class="btn btn-action btn-light btn-block" (click)="openDefectModal()">
+        <!-- <i class="fas fa-cogs"></i> Defect</button> -->
+        <i class="fas fa-cogs"></i> ชำรุด</button>
+    </div>
+    <div class="col-2">
+      <app-modal-view-barcode [mStat]="barViewStat" (c)="closeModal($event)" (_bypass_print)="printbarcode($event)" [stockData]="stockData"></app-modal-view-barcode>
+      <button class="btn btn-action btn-light btn-block" data-toggle="modal" (click)="openModalBarcode()">
+        <i class="fas fa-eye"></i> แสดงบาร์โค้ด</button>
+    </div>
+    <div class="col-4 dropdown d-flex justify-content-end">
+      <form [formGroup]="form">
+        <div class="form-group">
+          <select class="form-control-sm" formControlName="num_row" (change)="getStock()">
+            <option value="5">5 แถว</option>
+            <option value="10">10 แถว</option>
+            <option value="20">20 แถว</option>
+          </select>
+          <select class="form-control-sm" formControlName="status" (change)="getStock()">
+            <option value="al">ทั้งหมด</option>
+            <option value="ep">ว่าง</option>
+            <option value="bs">ไม่ว่าง</option>
+            <option value="df">ชำรุด</option>
+          </select>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="printbarcode">
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 50%">บาร์โค้ด</th>
+          <th>รายละเอียด</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bc of stock_data">
+          <td>
+            <ngx-barcode [bc-element-type]="elementType" [bc-value]="bc.barcode" [bc-format]="format" [bc-display-value]="displayValue"
+              [bc-height]="height" [bc-width]="width" [bc-font-size]="fontSize" [bc-margin-bottom]="marginBottom">
+            </ngx-barcode>
+            <p class="text-barcode">{{bc.barcode | barcode}}</p>
+
+          </td>
+          <td>ชนิด อุปกรณ์ : {{bc.type_name}}
+            <br>ชื่อสต๊อก : {{bc.st_name}}
+            <br>บาร์์โค้ด : {{bc.barcode | barcode}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="no-print">
+
+    <mat-table #table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="st_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> รหัสสต๊อก </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.st_id}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="st_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ชื่ออุปกรณ์ </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.st_name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="type_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ชนิด อุปกรณ์ </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.type_name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="brand_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> แบรนด์ </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.brand_name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="sta_name">
+        <mat-header-cell class="status-margin" *matHeaderCellDef mat-sort-header> สถานะ </mat-header-cell>
+        <mat-cell class="status-margin" *matCellDef="let element" [ngClass]="{'text-success':element.status == 'ep',
+          'text-danger':element.status == 'df',
+          'text-warning':element.status == 'bs'}"> {{element.sta_name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef class="text-center"> ฟังก์ชั่น </mat-header-cell>
+        <mat-cell class="text-center" *matCellDef="let element">
+
+          <i class="fas fa-align-justify text-dark" [matMenuTriggerFor]="menu"></i>
+
+          <mat-menu #menu="matMenu">
+            <mat-list-item>
+              <button mat-menu-item *ngIf="element.status == 'ep'" (click)="openSelectborrow(element.st_id, element.sta_name)">
+                <i class="fas fa-hands"></i> ยืม
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button mat-menu-item *ngIf="element.status == 'bs'" (click)="openSelectreturn(element)">
+                <i class="fas fa-reply"></i> คืน
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button mat-menu-item *ngIf="element.status != 'df'" (click)="openSelectdefect(element)">
+                <!-- <i class="fas fa-cogs"></i> Defect -->
+                <i class="fas fa-cogs"></i> ชำรุด
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button mat-menu-item *ngIf="element.status == 'bs'" (click)="openViewborrow(element.st_id)">
+                <i class="fas fa-hands"></i> ดูข้อมูลการยืม
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button mat-menu-item (click)="openEModal(element)">
+                <i class="fas fa-edit"></i> แก้ไข
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button mat-menu-item (click)="openDetailModal(element)">
+                <i class="fas fa-info-circle"></i> รายละเอียด
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button mat-menu-item *ngIf="element.status == 'ep'" (click)="openDeleteModal(element.st_id, element.st_name)">
+                <i class="fas fa-trash"></i> ลบ
+              </button>
+            </mat-list-item>
+          </mat-menu>
+
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <br>
+    <div class="alert alert-danger " role="alert" *ngIf="stock_data.length == 0 && search_nf">
+      <br>
+      <div class="d-flex justify-content-center">
+        <a class="alert-heading text-notfound"> ไม่พบข้อมูล "{{search_nf}}"</a>
+      </div>
+      <hr>
+      <div class="d-flex justify-content-center">
+        <a class="text-notfound">ค้นหาด้วย "รหัส อุปกรณ์", "ชื่ออุปกรณ์", "บาร์โค้ด", "ชนิด อุปกรณ์", "หมวดหมู่"</a>
+      </div>
+      <br>
+    </div>
+    <div class="alert alert-danger " role="alert" *ngIf="stock_data.length == 0 && !search_nf">
+      <br>
+      <div class="d-flex justify-content-center">
+        <a class="alert-heading text-notfound">ไม่พบข้อมูลในฐานข้อมูล</a>
+      </div>
+      <br>
+    </div>
+  </div>
+  <br>
+
+  <nav aria-label="Page navigation example">
+    <ul class="form-inline pagination justify-content-end">
+      <a class="page-link noselect text-page" style="cursor: default;">หน้า: {{setPage}}
+      </a>
+    </ul>
+  </nav>
+  <nav aria-label="Page navigation example" *ngIf="stock_data.length > 0">
+    <ul class="pagination justify-content-end">
+      <li class="page-item" style="padding-right: 5px;" *ngIf="navPage.length > 1">
+        <button type="button" class="btn btn-light" (click)="previoustabPage()" [disabled]="countPage[0] == 1">
+          <i class="fas fa-angle-double-left"></i>
+        </button>
+      </li>
+      <li class="page-item" style="padding-right: 1px;">
+        <button type="button" class="btn btn-light btn-nextprev" (click)="previousPage()" [disabled]="setPage == 1">
+          <i class="fas fa-caret-left"></i> ก่อนหน้า
+        </button>
+      </li>
+      <li class="page-item" *ngFor="let i of countPage" style="width: 40px;text-align: center">
+        <a class="page-link noselect" (click)="selectPage(i)" [ngClass]="{'text-light':setPage == i,'bg-dark':setPage == i}">{{i}}</a>
+      </li>
+      <li class="page-item" style="padding-left: 1px;">
+        <button type="button" class="btn btn-light btn-nextprev" (click)="nextPage()" [disabled]="setPage == checkdisBut">
+          ถัดไป
+          <i class="fas fa-caret-right"></i>
+        </button>
+      </li>
+      <li class="page-item" style="padding-left: 5px;" *ngIf="navPage.length > 1">
+        <button type="button" class="btn btn-light" (click)="nexttabPage()" [disabled]="countPage[countPage.length-1] == checkdisBut">
+          <i class="fas fa-angle-double-right"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <app-modal-create-stock [modalState]="createModalState" (c)="closeModal($event)"></app-modal-create-stock>
+
+  <app-modal-edit-stock [modalState]="eModalState" [stockData]="stockData" (c)="closeModal($event)"></app-modal-edit-stock>
+  <app-modal-del-stock [id]="stockID" [stockName]="stockName" [modalState]="delModalState" (c)="closeModal($event)"></app-modal-del-stock>
+  <app-modal-stock-detail [modalState]="detailModalState" [stockData]="stockData" (c)="closeModal($event)"></app-modal-stock-detail>
+
+  <app-modal-stock-viewborrow [openModal]="statusViewBorrow" [stockID]="stockID" (close)="closeModal($event)"></app-modal-stock-viewborrow>
+
+  <app-modal-selectborrow [openModal]="statusSelectborrow" [stockID]="stockID" [stockStatus]="stock_status" (close)="closeModal($event)"></app-modal-selectborrow>
+  <app-modal-selectreturn [openModal]="statusSelectreturn" [Stockdata]="stockData" (close)="closeModal($event)"></app-modal-selectreturn>
+  <app-modal-selectdefect [openModal]="statusSelectdefect" [StockData]="stockData" (close)="closeModal($event)"></app-modal-selectdefect>
+
+</div>

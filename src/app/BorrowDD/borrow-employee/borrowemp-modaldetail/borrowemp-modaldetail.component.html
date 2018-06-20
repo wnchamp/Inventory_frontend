@@ -1,0 +1,60 @@
+<div class="modal fade" id="borrowdetailModal" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a>
+          <i class="fas fa-info-circle"></i> การยืม</a>
+        <button type="button" class="close text-light" (click)="onClose()" aria-label="Close">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-primary form-control" (click)="onPrint()">
+            <i class="fas fa-print"></i> พิมพ์</button>
+        </div>
+
+        <div *ngIf="dataBorrow.length > 0" class="table-respon">
+          <table>
+            <thead>
+              <tr>
+                <th class="text-center">รหัสการยืม</th>
+                <th>ชื่ออุปกรณ์</th>
+                <th>ซีเรียลนัมเบอร์</th>
+                <th>วันที่ยืม</th>
+                <th class="text-center">ฟังก์ชั่น</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let datas of dataBorrow">
+                <td class="text-center" scope="row">{{datas.bo_id}}</td>
+                <td>{{datas.st_name}}</td>
+                <td>{{datas.serial_no}}</td>
+                <td>{{datas.borrow_dt | date: 'dd-MM-yyyy HH:mm'}}</td>
+                <td class="text-center ">
+                  <i class="fas fa-align-justify text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                  <div class="dropdown-menu dropdown-menu-right" area-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="openReturn(datas)">
+                      <i class="fas fa-reply text-dark"></i> คืน</a>
+                    <a class="dropdown-item" (click)="openDetail(datas)">
+                      <i class="fas fa-info-circle text-dark"></i> รายละเอียด</a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-secondary form-control" (click)="onClose()">ปิด</button>
+      </div>
+    </div>
+  </div>
+
+  <app-borrowemp--modaldetail-detail [openModal]="statusDetailborrow" [data]="data" (close)="closeModal($event)"></app-borrowemp--modaldetail-detail>
+  <app-borrowemp-modalreturn [openModal]="statusReturnstock" [data]="data" (close)="closeModal($event)"></app-borrowemp-modalreturn>
+
+</div>

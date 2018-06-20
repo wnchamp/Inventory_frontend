@@ -1,0 +1,19 @@
+.nav-link {
+    display: block;
+    padding: .5rem 1rem;
+}
+
+
+#inventorySidebar {
+    width: 250px;
+    height: 100%;
+    position: fixed;
+}
+
+@media (max-width: 850px) {
+} 
+
+
+.pointer {
+    cursor: pointer;
+}

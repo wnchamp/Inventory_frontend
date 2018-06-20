@@ -1,0 +1,44 @@
+.container-fluid{
+    padding-top: 10px;
+}
+.section1{
+   padding: 10px;
+   height: 100%;
+}
+
+.btn{
+    min-width: 60px;
+    min-height: 50px;
+}
+
+.btn > i{
+    font-size: 30px;
+    width: 60px;
+}
+.section1  button{
+    margin-top: 5px;
+}
+p{
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.col-left{
+    font-size: 20px;
+}
+
+
+.btn > b{
+    display: none;
+    transition: display 1s;
+    
+}
+.btn:hover b{
+    display: unset;
+}
+
+.btn:hover i{
+    font-size: 18px;
+}
+
+

@@ -1,0 +1,48 @@
+<div class="container-fluid">
+  <br>
+  <div class="header">
+    <a class="text-header">รายการยืม</a>
+  </div>
+  <hr>
+  <form [formGroup]="form" class="form-inline justify-content-end">
+      <select class="form-control"   formControlName="row" (change)="selectrow()">
+          <option value="5">5 แถว</option>
+          <option value="10">10 แถว</option>
+          <option value="20">20 แถว</option>
+        </select>
+    <div class="form-group mx-sm-3">
+      <input type="text" class="form-control" formControlName="search" placeholder="text...">
+    </div>
+    <button type="submit" class="btn">
+      <i class="fas fa-search"></i> ค้นหา</button>
+  </form>
+  <br>
+  <table class="table">
+    <thead>
+      <tr>
+
+        <th scope="col">ชื่ออุปกรณ์</th>
+        <th scope="col">บาร์โค้ด</th>
+        <th scope="col">วันที่ยืม</th>
+        <th scope="col" >เลขซีเรียลนัมเบอร์</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let br of data_borrow">
+
+        <td>{{br.st_name}}</td>
+        <td>{{br.barcode | barcode}}</td>
+        <td>{{br.borrow_dt | date }}</td>
+        <td >{{br.serial_no}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-end">
+        <li class="page-item" *ngFor="let page of page">
+          <a class="page-link"  [ngClass]="{'text-primary':page_select == page}" (click)="selectpage(page)">{{page}}</a>
+        </li>
+      </ul>
+    </nav>
+</div>

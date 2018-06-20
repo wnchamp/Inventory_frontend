@@ -1,0 +1,27 @@
+<div class="modal fade" id="borrowempModalreturn" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-reply"></i> การคืน</a>
+        <button type="button" class="close" (click)="onClose()">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <a>ชื่ออุปกรณ์: "{{data.st_name}} " </a>
+        <br>
+        <a>ชื่อพนักงาน: "{{data.fullname}} " </a>
+        <br>
+        <br>
+        <h4>ยืนยันการคืน อุปกรณ์!!!</h4>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-primary" (click)="onReturn()">คืน</button>
+        <button type="button" class="btn btn-secondary" (click)="onClose()">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+</div>

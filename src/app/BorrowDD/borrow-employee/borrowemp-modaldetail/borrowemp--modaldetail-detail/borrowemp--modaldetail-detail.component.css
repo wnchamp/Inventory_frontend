@@ -1,0 +1,37 @@
+.modal-header {
+    font-size: 25px;
+    color: white;
+    background-color: #424242;
+}
+
+.fas {
+    color: white;
+}
+
+.text-barcode{
+    font-size: 15px;
+    padding-top: 0;
+    margin-top: -10px;
+    text-align: center;
+}
+
+.modal-footer button {
+    font-size: 20px;
+    width: 30%;
+}
+
+.modal {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.c1 {
+    width: 20%;
+}
+
+.c2 {
+    width: 80%;
+}
+
+span {
+    font-weight: bold;
+}

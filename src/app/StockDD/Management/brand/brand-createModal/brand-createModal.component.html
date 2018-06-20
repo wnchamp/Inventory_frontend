@@ -1,0 +1,42 @@
+<div class="modal fade" id="brandCreateModal" data-backdrop="static" data-keyboard="false" aria-labelledby="brandCreateModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-plus-circle"></i> เพิ่ม แบรนด์</a>
+        <button type="button" class="close" (click)="close()" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form [formGroup]="form">
+            <div class="form-group d-flex justify-content-center">
+              <select *ngIf="type_data.length > 0" class="form-control-lg" formControlName="type" required>
+                <option value="" disabled>เลือก ชนิด อุปกรณ์</option>
+                <option *ngFor="let data of type_data" [value]="data.type_id">{{data.type_name}} </option>
+              </select>
+            </div>
+            <div class="form-group d-flex justify-content-center">
+              <input class="form-control-lg" formControlName="brandName" type="text" placeholder="ใส่แบรนด์" required minlength="3" maxlength="30">
+            </div>
+            <div *ngIf="this.form.controls['brandName'].dirty && this.form.controls['brandName'].errors?.required" class="container-fluid d-flex justify-content-center alert alert-danger">
+              กรุณาใส่ชื่อแบรนด์ เช่น iphone, acer !
+            </div>
+            <div *ngIf="this.form.controls['brandName'].errors?.minlength" class="container-fluid d-flex justify-content-center alert alert-danger">
+              กรุณาใส่ข้อมูล 3 ตัวอักษรขึ้นไป !
+            </div>
+            <div *ngIf="this.form.controls['brandName'].errors?.pattern" class="container-fluid d-flex justify-content-center alert alert-danger">
+              กรุณาใช้ ก-ฮ, A-Z, 0-9 เท่านั้น !
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-success" (click)="createBrand()" [disabled]="form.invalid">เพิ่ม</button>
+        <button type="button" class="btn btn-secondary" (click)="close()">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+</div>

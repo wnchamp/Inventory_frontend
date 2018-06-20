@@ -1,0 +1,95 @@
+
+.navbar{
+    z-index: 99;
+    background-color: #071A1E;
+}
+
+.btn-sign-out{
+    width: 150px;
+    height: 40px;
+    background-color: #071A1E;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+  outline: none;
+  vertical-align: middle;
+}
+
+.btn-sign-out:hover{
+    border: 1px solid rgb(255, 59, 59);
+    color: rgb(255, 59, 59);
+}
+.btn-sign-out:hover .fa-sign-out-alt{
+    color:rgb(255, 59, 59);
+
+
+}
+.fa-cog{
+    color: white;
+    font-size: 25px;
+    vertical-align: middle;
+    margin-right: 10px;
+    -webkit-transition: 0.5s ease-out;
+    -moz-transition:  0.5s ease-out;
+    transition:  0.5s ease-out;
+}
+.fa-sign-out-alt{
+    color:white;
+    font-size: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+ margin-left: 10px;
+
+}
+
+.logo {
+    height: 40px;
+    width: 40px;
+    margin-left: 65px;
+}
+
+.rotate {
+    cursor:pointer;
+    text-decoration:none;
+
+}
+
+.rotate:hover .fa-cog{
+        -webkit-transform: rotateZ(180deg);
+        -moz-transform: rotateZ(180deg);
+        transform: rotateZ(180deg);
+        color: #59BBFF;
+}
+
+
+
+.rotate > b{
+    color: white;
+    display: none;
+    -webkit-transition: 0.5s ease-out;
+    -moz-transition:  0.5s ease-out;
+    transition:  0.5s ease-out;
+
+}
+
+.rotate:hover b{
+    display: unset;
+}
+
+
+@media (max-width: 1400px) {
+    nav{
+        height: 50px;
+    }
+
+    .btn-sign-out{
+        width: 130px;
+        height: 30px;
+        font-size: 15px;
+    }
+    .fa-sign-out-alt{
+        font-size: 15px;
+    }
+
+}

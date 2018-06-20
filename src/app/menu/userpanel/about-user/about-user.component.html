@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <br>
+  <div class="header">
+    <a class="text-header">ข้อมูล ผู้ใช้</a>
+  </div>
+  <hr>
+  <div class="row body">
+
+    <div class="col-12 profile" *ngIf="data_user">
+      <div class="card text-left">
+        <div class="card-header">
+            โปรไฟล์ <i class="far fa-user-circle"></i>
+        </div>
+        <div class="card-body" *ngIf="data_user">
+          <p>
+            ชื่อผู้ใช้: <b> {{data_user.username}} </b></p>
+          <p>
+            ชื่อ : <b> {{data_user.first_name_en}} ({{data_user.first_name}})</b></p>
+          <p>
+            นามสกุล : <b> {{data_user.last_name_en}} ({{data_user.last_name}})</b></p>
+            <p>
+              ชื่อเล่น : <b> {{data_user.emp_nickname}}</b></p>
+          <p>
+            แผนก : <b> {{data_user.dep_name}}</b></p>
+        </div>
+        <div class="card-footer text-right">
+            <!-- <a routerLink="/home/setting/account">change username</a> / -->
+            <a routerLink="/home/setting/password">เปลี่ยน รหัสผ่าน</a>
+
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </div>
+  <br>
+
+
+</div>

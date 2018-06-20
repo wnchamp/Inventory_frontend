@@ -1,0 +1,60 @@
+<div class="modal fade" id="ModalEditDepartment" data-backdrop="static" aria-labelledby="ModalEditDepartmentTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a>
+          <i class="fas fa-edit"></i> แก้ไข แผนก</a>
+        <button type="button" class="close" data-dismiss="modal" (click)="OnClose()">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <form [formGroup]="FormEdit" (submit)="OnEdit()">
+        <div class="modal-body">
+          <div class="container-fluid" *ngIf="datadep">
+            <div class="form-group d-flex justify-content-center">
+              <input class="form-control-lg" type="text" placeholder="{{datadep.dep_no}}" formControlName="department_no" minlength="3"
+                maxlength="15" required>
+            </div>
+            <!-- <div *ngIf="!FormEdit.controls['department_no'].valid && FormEdit.controls['department_no'].touched" class="alert alert-danger ">
+              <p> ใส่เลข 0-9 เท่านั้น !!</p>
+            </div> -->
+            <div *ngIf="this.FormEdit.controls['department_no'].dirty && this.FormEdit.controls['department_no'].errors?.required"
+              class="container-fluid d-flex justify-content-center alert alert-danger">
+              กรุณากรอกเบอร์โทรแผนก!
+            </div>
+            <div *ngIf="this.FormEdit.controls['department_no'].errors?.minlength" class="container-fluid d-flex justify-content-center alert alert-danger">
+              กรุณาใส่เบอร์โทรแผนก อย่างน้อย 3 ตัวอักษร!
+            </div>
+            <div *ngIf="this.FormEdit.controls['department_no'].errors?.pattern" class="container-fluid d-flex justify-content-center alert alert-danger">
+              กรุณาใส่เบอร์โทรแผนก ด้วยตัวเลข 0-9 เท่านั้น!
+            </div>
+            <div class="form-group d-flex justify-content-center">
+              <input class="form-control-lg" type="text" placeholder="{{datadep.dep_name}}" formControlName="department_name" minlength="3"
+                maxlength="100" required>
+            </div>
+            <div *ngIf="this.FormEdit.controls['department_name'].dirty && this.FormEdit.controls['department_name'].errors?.required"
+              class="container-fluid d-flex justify-content-center alert alert-danger">
+              กรุณากรอกชื่อแผนก!
+            </div>
+            <div *ngIf="this.FormEdit.controls['department_name'].errors?.minlength" class="container-fluid d-flex justify-content-center alert alert-danger">
+              กรุณาใส่ชื่อแผนก อย่างน้อย 3 ตัวอักษร!
+            </div>
+            <div *ngIf="this.FormEdit.controls['department_name'].errors?.pattern" class="container-fluid d-flex justify-content-center alert alert-danger">
+              กรุณาใส่ชื่อแผนก ด้วยตัวอักษร a-z A-Z 0-9 เท่านั้น!
+            </div>
+            <!-- <div *ngIf="!FormEdit.controls['department_name'].valid && FormEdit.controls['department_name'].touched" class="alert alert-danger ">
+              <p>ใส่ A-Z a-z เท่านั้น !!</p>
+            </div> -->
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="submit" class="btn form-control btn-warning" [disabled]="!FormEdit.valid">
+            <i class="fas fa-save" style="color:black"></i> บันทึก</button>
+          <button type="button" class="btn form-control btn-secondary" (click)="OnClose()">ยกเลิก</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

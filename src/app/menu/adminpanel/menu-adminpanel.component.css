@@ -1,0 +1,99 @@
+.btn:focus{
+    outline:none;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid white;
+    margin: 1em 0;
+    padding: 0;
+}
+
+
+li {
+    list-style: none;
+    padding-top: 10px;
+}
+
+.topic {
+    text-align: left;
+    cursor: pointer;
+    font-size: 20px;
+    color: white
+}
+
+.topic:hover {
+    text-decoration: black;
+}
+
+.text-suptop {
+    font-size: 16px;
+    color: white;
+}
+
+.text-suptop:hover, .card-item:hover {
+    text-decoration: none;
+}
+
+.text-suptop:focus .topic:hover,button:focus {
+    outline: none;
+    border-bottom: 1px solid white;
+}
+
+.card-item {
+    padding-left: 15px;
+    padding-top: 6px;
+    color: white;
+}
+
+.card-item:focus {
+    outline: none;
+    border-bottom: 1px solid white;
+}
+
+button {
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    background-color:  #071A1E;
+    border: none;
+}
+
+
+.topic i {
+    width: 30px;
+}
+
+.text-topic{
+    font-size: 20px;
+}
+
+#collapseStock, #collapseEmp, #collapseBorrow, #collapseDefect, #collapseGarbage  ,#collapseManaStock{
+    padding-left: 15px;
+}
+
+@media (max-width: 1400px) {
+    .text-topic{
+        font-size: 15px;
+    }
+
+    .topic i {
+        width: 25px;
+    }
+
+    hr{
+        margin: 0.5px;
+    }
+
+    .text-suptop {
+        font-size: 14px;
+    }
+
+    li{
+        padding-top:0;
+    }
+    .btn{
+        padding: .150rem .30rem;
+    }
+}

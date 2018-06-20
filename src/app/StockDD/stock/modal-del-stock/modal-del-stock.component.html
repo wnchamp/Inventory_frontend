@@ -1,0 +1,26 @@
+<div class="modal fade " id="delModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a>
+          <i class="fas fa-trash"></i> ลบ อุปกรณ์</a>
+        <button type="button" class="close text-light" (click)="closeModal()" aria-label="Close">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <a class="text-alert">ชื่อ อุปกรณ์: "{{stockName}}"</a>
+        <br>
+        <br>
+        <h4 *ngIf="!alertalready" class="text-alert">ยืนยันการลบ !!!</h4>
+        <h4 *ngIf="alertalready" class="d-flex justify-content-center text-danger"> ไม่สามารถลบ "{{stockName}}" ได้  </h4>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-danger " (click)="delItem()" [disabled]="alertalready">ลบ</button>
+        <button type="button" class="btn btn-secondary " (click)="closeModal()">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+</div>

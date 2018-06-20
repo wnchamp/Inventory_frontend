@@ -1,0 +1,25 @@
+<div class="modal fade" id="garbmoveModalbrand" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-undo-alt"></i> กู้คืน แบรนด์</a>
+        <button type="button" class="close" (click)="onClose()">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <a>ชื่อ แบรนด์: "{{name | uppercase}}" </a>
+        <br>
+        <br>
+        <h4>ยืนยันการกู้คืน !!!</h4>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-warning" (click)="onConfirm()">กู้คืน</button>
+        <button type="button" class="btn btn-secondary" (click)="onClose()">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+</div>

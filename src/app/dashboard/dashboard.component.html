@@ -1,0 +1,219 @@
+<div class="container-fluid">
+  <br>
+  <div class="header">
+    <a class="text-header">แดชบอร์ด</a>
+
+  </div>
+  <hr>
+  <div class="row section1">
+    <div class="col-lg-4 col-md-4 col-sm-6">
+      <div class="div-head card1 row">
+        <div class="col-4 left">
+          <i class="fas fa-users"></i>
+        </div>
+        <div class="col-8 right">ผู้ใช้
+          <br>
+          <p style="text-align: center;">
+            <b>{{total_user}}</b> บัญชี</p>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6">
+      <div class="div-head card2 row">
+        <div class="col-4 left">
+          <i class="fas fa-box-open"></i>
+        </div>
+        <div class="col-8 right">สต๊อก
+          <br>
+          <p style="text-align: center;">
+            <b>{{total_stock}}</b> รายการ</p>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6">
+      <div class="div-head card3 row">
+
+        <div class="col-4 left">
+          <i class="fas fa-wrench card-fas"></i>
+        </div>
+        <div class="col-8 right">ซ่อมแซม
+          <br>
+          <p style="text-align: center;">
+            <b>{{total_repir}}</b> รายการ</p>
+        </div>
+
+
+
+      </div>
+    </div>
+
+
+  </div>
+  <div class="row ">
+    <div class="col-lg-6 col-md-12 col-sm-12 ">
+      <div class="borddiv">
+        <div class="canvas">
+          <p>ผังแสดงรายการสต๊อก ปัจจุบัน</p>
+
+
+          <canvas baseChart [data]="[count_stock_empty,count_stock_busy,count_stock_def]" [labels]="pieChartLabels" [colors]="color"
+            [chartType]="pieChartType"></canvas>
+        </div>
+        <div class="row" style="margin-top:20px;">
+          <div class="col-4">
+            <div class="card">
+              <div class="card-header ep">
+                ว่าง
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{count_stock_empty}}
+                  <br> รายการ</h5>
+
+                <button class="btn-card ep">{{per_stock_empty | number:'2.0-0'}}%</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="card">
+              <div class="card-header bs">
+                ยืม
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{count_stock_busy}}
+                  <br> รายการ</h5>
+
+                <button class="btn-card bs">{{per_stock_busy | number:'2.0-0'}}%</button>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-4">
+            <div class="card">
+              <div class="card-header df">
+                ชำรุด
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{count_stock_def}}
+                  <br> รายการ</h5>
+
+                <button class="btn-card df">{{per_stock_def | number:'2.0-0'}}%</button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+
+
+    </div>
+    <div class="col-lg-6 col-md-12 col-sm-12">
+      <div class="borddiv">
+        <p>เดือนล่าสุด ( {{month | date:"MMMM"}} )</p>
+        <div class="row">
+          <div class="col-6">
+            <div class="card-lm">
+              <div class="row ">
+                <div class="col-6">
+                  <i class="fas fa-plus-circle card-fas"></i>
+                </div>
+                <div class="col-6 card-lm-body">รายการใหม่
+                  <h1>+{{amount_item_new}}</h1>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="card-lm">
+              <div class="row ">
+                <div class="col-6">
+                  <i class="fas fa-user-plus card-fas"></i>
+                </div>
+                <div class="col-6 card-lm-body">ผู้ใช้ใหม่
+                  <h1>+{{amount_user_new}}</h1>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="borddiv">
+        <p>สถานะ บัญชีผู้ใช้</p>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card-lm">
+              <div class="row ">
+                <div class="col-4">
+                  <i class="fas fa-hand-peace card-fas"></i>
+                </div>
+                <div class="col-4 card-lm-body" >
+                  <h4>ปัจจุบัน</h4>
+                  <h3>กำลังใช้งาน</h3>
+                </div>
+                <div class="col-4 card-lm-body">{{count_user_active}} บัญชี
+                  <h1>{{user_active | number:'2.0-0'}}%</h1>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="card-lm">
+              <div class="row ">
+                <div class="col-4">
+                  <i class="fas fa-hand-paper card-fas"></i>
+                </div>
+                <div class="col-4 card-lm-body">
+                  <h4>ปัจจุบัน</h4>
+                  <h3>ระงับการใช้งาน</h3>
+                </div>
+                <div class="col-4 card-lm-body">{{count_user_block}} บัญชี
+                  <h1>{{user_block | number:'2.0-0'}}%</h1>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-12" >
+      <div class="borddiv" >
+        <table class="table-type">
+          <thead>
+            <th style="width: 20%;padding-left: 20px;">รายการอุปกรณ์</th>
+
+            <th class="text-center" style="width: 20%;">ว่าง (รายการ)</th>
+            <th class="text-center" style="width: 20%;">ยืม (รายการ)</th>
+            <th class="text-center" style="width: 20%;">ชำรุด (รายการ)</th>
+            <th class="text-center" style="width: 20%;">ทั้งหมด (รายการ)</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of data_type">
+              <td style="padding-left: 30px;">{{data.type}}</td>
+
+              <td class="text-center  ca">{{data.enpty_type}}</td>
+              <td class="text-center  cb">{{data.use_type}}</td>
+              <td class="text-center  cc">{{data.defective}}</td>
+              <td class="text-center  ct">{{data.total_type}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

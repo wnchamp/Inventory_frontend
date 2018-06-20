@@ -1,0 +1,87 @@
+<!-- modal delete stock -->
+<div class="modal fade " id="detailModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a>
+          <i class="fas fa-info-circle"></i> รายละเอียดการยืม</a>
+        <button type="button" class="close text-light" (click)="closeModal()" aria-label="Close">
+          <span aria-hidden="true">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <table class="table table-bordered table-hover">
+            <tbody *ngIf="detail_data">
+              <tr>
+                <td class="c1">
+                  <span>รหัสการยืม</span>
+                </td>
+                <td class="c2">{{detail_data.bo_id}}</td>
+              </tr>
+              <tr>
+                <td class="c1">
+                  <span>รหัสสต๊อก</span>
+                </td>
+                <td class="c2">{{detail_data.st_id}}</td>
+              </tr>
+              <tr>
+                <td class="c1">
+                  <span>ชื่อสต๊อก</span>
+                </td>
+                <td class="c2">{{detail_data.st_name}}</td>
+              </tr>
+              <tr>
+                <td class="c1">
+                  <span>ซีเรียลนัมเบอร์</span>
+                </td>
+                <td class="c2">{{detail_data.serial_no}}</td>
+              </tr>
+              <tr>
+                <td class="c1">
+                  <span>สถานะ</span>
+                </td>
+                <td class="c2">{{detail_data.sta_br_name}}</td>
+              </tr>
+              <tr>
+                <td class="c1">
+                  <span>ชื่อ</span>
+                </td>
+                <td class="c2">{{detail_data.fullname}}</td>
+              </tr>
+              <tr>
+                <td class="c1">
+                  <span>รหัสพนักงาน</span>
+                </td>
+                <td class="c2">{{detail_data.employee_id}}</td>
+              </tr>
+              <tr>
+                <td class="c1">
+                  <span>วันที่ยืม</span>
+                </td>
+                <td class="c2">{{detail_data.borrow_dt | date: 'dd-MM-yyyy HH:mm'}}</td>
+              </tr>
+              <tr>
+                <td class="c1">
+                  <span>บาร์โค้ด</span>
+                </td>
+                <td class="c2">{{detail_data.barcode | barcode}}
+                  <hr style="width: 100%">
+                  <ngx-barcode [bc-element-type]="elementType" [bc-value]="detail_data.barcode" [bc-format]="format" [bc-display-value]="displayValue"
+                    [bc-height]="height" [bc-width]="width" style="text-align: center;"></ngx-barcode>
+                  <p class="text-barcode">{{detail_data.barcode | barcode}}</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-primary form-control" (click)="closeModal()">ปิด</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end delete stock -->

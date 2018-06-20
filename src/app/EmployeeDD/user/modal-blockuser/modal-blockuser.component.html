@@ -1,0 +1,28 @@
+<div class="modal fade" id="blockuserModal" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-hand-paper"></i> ล็อค ผู้ใช้</a>
+        <button type="button" class="close" data-dismiss="modal" (click)="onClose()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body c">
+        ล็อค ผู้ใช้งานนี้!!!
+        <br>
+        <br>
+        <h3>ชื่อผู้ใช้:
+          <h3>"{{username | uppercase}}"</h3>
+        </h3>
+        <h3>ชื่อ:
+          <h3>"{{fname | uppercase}}"</h3>
+        </h3>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-warning" (click)="onBlock()">บันทึก</button>
+        <button type="button" class="btn btn-secondary" (click)="onClose()">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+a, label {
+    font-size: 20px;
+}
+a:link { 
+    text-decoration: none;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid white;
+    margin: 0.8em 0;
+    padding: 0;
+}
+
+.topic{
+    padding-left: 10px;
+}
+
+i{
+    width: 30px;
+}

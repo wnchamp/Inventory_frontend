@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <h2>ตังค่าบัญชี </h2>
+    <hr width="100%">
+    <div class="row section1" >
+        <div class="col-3 col-left">
+
+            <button routerLink="/home/setting/profile" class="btn btn-primary"><i class="far fa-user-circle"></i> <b>โปรไฟล์</b> </button><br>
+            <!-- <button routerLink="/home/setting/account" class="btn btn-primary"><i class="fas fa-lock"></i> <b>change account</b> </button><br> -->
+            <button routerLink="/home/setting/password" class="btn btn-danger"><i class="fas fa-key"></i> <b>เปลี่ยน รหัสผ่าน</b> </button>
+        </div>
+        <div class="col-6 col-right">
+
+            <router-outlet></router-outlet>
+        </div>
+        <div class="col-3"></div>
+    </div>
+
+
+</div>

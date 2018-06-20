@@ -1,0 +1,43 @@
+<div class="modal fade" id="cateCreateModal" data-backdrop="static" aria-labelledby="cateCreateModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="modal-title">
+          <i class="fas fa-plus-circle"></i> เพิ่ม หมวด อุปกรณ์</a>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="Close()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <br>
+      <form [formGroup]="form" (submit)="onCreate()">
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="form-group d-flex justify-content-center">
+              <input class="form-control-lg" (focus)="onCheck()" type="text" placeholder="category" formControlName="category" required
+                minlength="3" maxlength="50">
+            </div>
+            <div class="container-fluid d-flex justify-content-center">
+              <div *ngIf="this.form.controls['category'].errors?.pattern" class="alert alert-danger">
+                กรุณาใช้ ก-ฮ, A-Z, 0-9 เท่านั้น !
+              </div>
+            </div>
+            <div class="container-fluid d-flex justify-content-center">
+              <div *ngIf="this.form.controls['category'].errors?.minlength" class="alert alert-danger">
+                กรุณาใส่ข้อมูล 3 ตัวอักษรขึ้นไป !
+              </div>
+            </div>
+            <div class="container-fluid d-flex justify-content-center">
+              <div *ngIf="this.form.controls['category'].dirty && this.form.controls['category'].errors?.required" class="alert alert-danger">
+                กรุณาใส่ชื่อแบรนด์ เช่น computer, mouse !
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="submit" class="btn btn-success" [disabled]="form.invalid">เพิ่ม</button>
+          <button type="button" class="btn btn-secondary" (click)="Close()">ยกเลิก</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

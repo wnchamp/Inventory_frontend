@@ -1,0 +1,43 @@
+<img src="\assets\imgs\bg_login.jpg" class="bg-login">
+
+<div class="container-fluid">
+    <div class="spinner" *ngIf="login_spinner">
+
+    </div>
+    <div class="sk-folding-cube" *ngIf="login_spinner">
+        <div class="sk-cube1 sk-cube"></div>
+        <div class="sk-cube2 sk-cube"></div>
+        <div class="sk-cube4 sk-cube"></div>
+        <div class="sk-cube3 sk-cube"></div>
+      </div>
+  <div class="warp-login">
+
+    <div class="login-pic">
+      <img src="assets\imgs\logo-login.png" class="logo-login">
+    </div>
+
+    <form [formGroup]="Formlogin" class="form-group" (submit)="Onlogin()">
+      <div class="login-title">
+        เข้าสู่ระบบ Inventory
+      </div>
+
+      <div class="warp-input">
+        <input class="form-control" type="text" formControlName="username" placeholder="ชื่อผู้ใช้" required>
+        <span class="symbol-input">
+          <i class="fas fa-users"></i>
+        </span>
+      </div>
+      <div class="warp-input">
+        <input class="form-control" type="password" formControlName="password" placeholder="รหัสผ่าน" required>
+        <span class="symbol-input">
+          <i class="fas fa-unlock-alt"></i>
+        </span>
+      </div>
+
+      <div class="warp-button">
+        <button type="submit" class="btn btn-success">ลงชื่อเข้าใช้</button>
+      </div>
+    </form>
+
+  </div>
+</div>

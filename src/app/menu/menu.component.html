@@ -1,0 +1,32 @@
+<nav>
+  <a class="btn" data-toggle="collapse" id="sidebarBtn" data-target="#sidebarMenu">
+    <i class="fas fa-bars"></i>
+  </a>
+  <div class="collapse show" id="sidebarMenu">
+    <div class="menu-head">
+      <h1>AVESTA</h1>
+      <h3>Inventory</h3>
+    </div>
+
+    <!-- <div class="bd-item active">
+      <img src="/assets/imgs/logo-login.png" alt="" class="rounded-circle logo">
+    </div> -->
+    <div class="bd-item" *ngIf="issuperadminlogin">
+      <a class="text-light">ซุปเปอร์แอดมิน</a>
+    </div>
+
+    <div class="bd-item" *ngIf="isadminlogin">
+      <a class="text-light">แอดมิน</a>
+    </div>
+
+    <div class="bd-item" *ngIf="isuserlogin">
+      <a class="text-light">ผู้ใช้ทั่วไป</a>
+    </div>
+    <br>
+    <app-spadminpanel *ngIf="issuperadminlogin"></app-spadminpanel>
+    <app-menu-adminpanel *ngIf="isadminlogin"></app-menu-adminpanel>
+    <app-menu-userpanel *ngIf="isuserlogin"></app-menu-userpanel>
+
+  </div>
+
+</nav>

@@ -1,0 +1,215 @@
+<div class="container-fluid">
+  <br>
+  <div class="header">
+    <a class="text-header">อุปกรณ์ชำรุด / รายการซ่อม</a>
+  </div>
+  <hr>
+  <form [formGroup]="form">
+    <div class="form-group form-inline justify-content-end">
+      <div class="search">
+        <select class="form-control" formControlName="search_by">
+          <option value="al" >ทั้งหมด</option>
+          <option value="re_id"> รหัสการซ่อม</option>
+          <option value="de_id">รหัส อุปกรณ์ชำรุด</option>
+          <option value="st_id"> รหัสอุปกรณ์</option>
+          <option value="st_name">ชื่ออุปกรณ์</option>
+          <option value="serial_no">ซีเรียลนัมเบอร์</option>
+          <option value="barcode">บาร์โค้ด</option>
+          <option value="user_id">รหัสผู้ใช้</option>
+          <option value="fullname">ชื่อพนักงาน</option>
+        </select>
+        <input class="form-control" type="search" placeholder=" ค้นหา" formControlName="search" (keyup)="checkEmpty()" (keyup.enter)="checkErrors()">
+        <button type="button" [disabled]="this.form.invalid" class="btn search-button" (click)="getData()">
+          <i style="cursor: auto;" class="fas fa-search"></i >ค้นหา</button>
+      </div>
+    </div>
+    <div class="container-fluid justify-content-center">
+      <div class="row">
+        <div class="col-6"></div>
+        <div class="col-6">
+          <div class="row">
+            <div class="col-2"></div>
+            <div *ngIf="this.form.controls['search'].errors?.pattern" class="col-10 alert alert-danger">
+              ค้นหาด้วยตัวอักษร ก-ฮ a-z A-Z 0-9 เท่านั้น!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  </form>
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-2">
+        <button class="btn btn-light btn-block" (click)="openModalmultirepair()">
+          <i class="fas fa-hands-helping"></i> รับคืน</button>
+      </div>
+      <div class="col dropdown d-flex justify-content-end">
+        <div class="form-group" style="padding-right: 10px;">
+          <select class="form-control-sm" formControlName="numrow" (change)="getData()">
+            <option value="5">5 แถว</option>
+            <option value="10">10 แถว</option>
+            <option value="20">20 แถว</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- <div class="table-respon">
+    <table>
+      <thead>
+        <tr>
+          <th class="text-center"> รหัสการซ่อม</th>
+          <th>ชื่ออุปกรณ์</th>
+          <th>ชื่อพนักงาน</th>
+          <th>รายละเอียด</th>
+          <th class="text-center">สถานะ</th>
+          <th class="text-center">ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let datas of data">
+          <td class="text-center">{{ datas.re_id }}</td>
+          <td>{{ (datas.st_name.length > 25)? (datas.st_name | slice:0:25) + '...' : datas.st_name }}</td>
+          <td>{{datas.fullname_th}}</td>
+          <td>{{ (datas.description.length > 30)? (datas.description| slice:0:30) + '...' : datas.description}}</td>
+          <td class="text-center" width="15%" [ngClass]="{'text-warning':datas.reair_status_id == 'RP'}">{{datas.status_name}}</td>
+          <td class="text-center" width="10%">
+            <i class="fas fa-align-justify " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+            <div class="dropdown-menu dropdown-menu-right" area-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" (click)="openSelectreceiveModal(datas)">
+                <i class="fas fa-hands-helping"></i> Edit</a>
+              <a class="dropdown-item" (click)="openEditModal(datas)">
+                <i class="fas fa-edit"></i> Edit</a>
+              <a class="dropdown-item" (click)="openDetailModal(datas)">
+                <i class="fas fa-info-circle"></i> Detail</a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div> -->
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="re_id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>  รหัสการซ่อม </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.re_id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="st_name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ชื่อุปกรณ์ </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.st_name}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="fullname_th">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ชื่อพนักงาน </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.fullname_th}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> รายละเอียด </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status_name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> สถานะ </mat-header-cell>
+      <mat-cell *matCellDef="let element" [ngClass]="{'text-warning': element.reair_status_id == 'RP'}"> {{element.status_name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell class="text-center" *matHeaderCellDef> ฟังก์ชั่น </mat-header-cell>
+      <mat-cell class="text-center" *matCellDef="let element">
+
+        <i class="fas fa-align-justify text-dark" [matMenuTriggerFor]="menu"></i>
+
+        <mat-menu mat-button #menu="matMenu">
+          <mat-list-item>
+            <button mat-menu-item (click)="openSelectreceiveModal(element)">
+              <i class="fas fa-hands-helping"></i> คืน
+            </button>
+          </mat-list-item>
+          <mat-list-item>
+            <button mat-menu-item (click)="openEditModal(element)">
+              <i class="fas fa-edit"></i> แก้ไข
+            </button>
+          </mat-list-item>
+          <mat-list-item>
+            <button mat-menu-item (click)="openDetailModal(element)">
+              <i class="fas fa-info-circle"></i> รายละเอียด
+            </button>
+          </mat-list-item>
+        </mat-menu>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <br>
+  <div class="alert alert-danger " role="alert" *ngIf="data.length == 0 && search_nf">
+    <br>
+    <div class="d-flex justify-content-center">
+      <a class="alert-heading text-notfound">  ไม่พบข้อมูล "{{search_nf}}"</a>
+    </div>
+    <hr>
+    <div class="d-flex justify-content-center">
+      <a class="text-notfound">input search by " รหัสการซ่อม", "ชื่อุปกรณ์", "บาร์โค้ด", "ซีเรียลนัมเบอร์", "Employee"</a>
+    </div>
+    <br>
+  </div>
+  <div class="alert alert-danger " role="alert" *ngIf="data.length == 0 && !search_nf">
+    <br>
+    <div class="d-flex justify-content-center">
+      <a class="alert-heading text-notfound">ไม่พบข้อมูลในฐานข้อมูล</a>
+    </div>
+    <br>
+  </div>
+
+  <br>
+  <nav aria-label="Page navigation example">
+    <ul class="form-inline pagination justify-content-end">
+      <a class="page-link noselect text-page" style="cursor: default;">หน้า: {{setPage}}
+      </a>
+    </ul>
+  </nav>
+  <nav aria-label="Page navigation example" *ngIf="data.length > 0">
+    <ul class="pagination justify-content-end">
+      <li class="page-item" style="padding-right: 5px;" *ngIf="navPage.length > 1">
+        <button type="button" class="btn btn-light" (click)="previoustabPage()" [disabled]="countPage[0] == 1">
+          <i class="fas fa-angle-double-left"></i>
+        </button>
+      </li>
+      <li class="page-item" style="padding-right: 1px;">
+        <button type="button" class="btn btn-light btn-nextprev" (click)="previousPage()" [disabled]="setPage == 1">
+          <i class="fas fa-caret-left"></i> ก่อนหน้า
+        </button>
+      </li>
+      <li class="page-item" *ngFor="let i of countPage" style="width: 40px;text-align: center">
+        <a class="page-link noselect" (click)="selectPage(i)" [ngClass]="{'text-light':setPage == i,'bg-dark':setPage == i}">{{i}}</a>
+      </li>
+      <li class="page-item" style="padding-left: 1px;">
+        <button type="button" class="btn btn-light btn-nextprev" (click)="nextPage()" [disabled]="setPage == checkdisBut">
+     ถัดไป
+          <i class="fas fa-caret-right"></i>
+        </button>
+      </li>
+      <li class="page-item" style="padding-left: 5px;" *ngIf="navPage.length > 1">
+        <button type="button" class="btn btn-light" (click)="nexttabPage()" [disabled]="countPage[countPage.length-1] == checkdisBut">
+          <i class="fas fa-angle-double-right"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <app-modalrepair-selectreceive [openModal]="statusSelectreceive" [data]="detailData" (close)="closeModal($event)"></app-modalrepair-selectreceive>
+  <app-modalrepair-edit [openModal]="statusModaledit" [data]="detailData" (close)="closeModal($event)"></app-modalrepair-edit>
+  <app-modal-repair-detail [modalState]="detailModalState" [repairData]="detailData" (c)="closeModal($event)"></app-modal-repair-detail>
+
+  <app-modalrepair-multireceive [openModal]="statusMultirepair" (close)="closeModal($event)"></app-modalrepair-multireceive>
+
+</div>
