@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <a class="modal-title">
-          <i class="fas fa-plus-circle"></i> Create Purchase List</a>
+          <i class="fas fa-plus-circle"></i> เพิ่มรายการสั่งซื้อ</a>
         <button type="button" class="close" (click)="onClose()" aria-label="Close">
           <i class="fas fa-times"></i>
         </button>
@@ -16,7 +16,8 @@
             <a class="text-avesta">A V E S T A</a>
           </div>
           <div class="form-inline d-flex justify-content-center noselect" style="margin-bottom: 20px;">
-            <a class="text" style="text-decoration: underline">REQUEST FOR PURCHASE</a>
+            <!-- <a class="text" style="text-decoration: underline">REQUEST FOR PURCHASE</a> -->
+            <h5 class="text" style="text-decoration: underline">แบบฟอร์มขอสั่งซื้อ</h5>
           </div>
 
           <!-- <div class="form-inline d-flex justify-content-end noselect" style="margin-bottom: 20px;">
@@ -25,21 +26,21 @@
           </div> -->
 
           <div class="form-inline d-flex justify-content-start noselect">
-            <a class="text" style="margin-left: 5px;">Order Information</a>
+            <h5 class="text" style="margin-left: 5px;">ข้อมูลผู้สั่งซื้อ</h5>
           </div>
           <table class="table table-bordered noselect">
             <tbody formGroupName="order_info">
               <tr>
-                <th scope="row">Ordered by</th>
+                <th scope="row">ผู้สั่งซื้อ</th>
                 <td>
                   <input type="text" formControlName="order_by" class="form-control" placeholder="kraiwith kamchu" readonly>
                 </td>
-                <td class="form-inline">Phone:
+                <td class="form-inline">โทร :
                   <input type="text" formControlName="phone" class="form-control" placeholder="0888888888">
                 </td>
               </tr>
               <tr>
-                <th >Address</th>
+                <th >ที่อยู่ :</th>
                 <td colspan="2">
                   <textarea formControlName="address" class="form-control" placeholder="กทม. บกป. คต. ปณ. 50000"></textarea>
                 </td>
@@ -88,21 +89,21 @@
 
         <form [formGroup]="form">
           <div class="form-inline d-flex justify-content-between noselect">
-            <a class="text" style="margin-left: 5px;">Order List</a>
+            <a class="text" style="margin-left: 5px;">รายการ</a>
             <button type="button" class="btn btn-success btn-sm" (click)="onaddList()" style="margin-bottom: 3px">
               <i class="fas fa-plus"></i>
-              Add List</button>
+              เพิ่มรายการ</button>
           </div>
           <table class="table table-bordered noselect">
             <thead>
               <tr class="text-center">
-                <th>Item</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th width="8%px">QTY</th>
-                <th width="13%">PRICE/UNIT</th>
-                <th width="15%">AMOUNT</th>
-                <th width="6%">Act.</th>
+                <th>ลำดับ</th>
+                <th>รายการ</th>
+                <th>รายละเอียด</th>
+                <th width="10%">จำนวน</th>
+                <th width="13%">ราคา/หน่วย</th>
+                <th width="15%">จำนวนเงิน</th>
+                <th width="6%">ลบ</th>
               </tr>
             </thead>
             <tbody formArrayName="Items" *ngFor="let item of getList.controls; let i = index">
@@ -144,15 +145,15 @@
                   <!-- <textarea class="form-control" placeholder="Address Detail..." cols="50" rows="5"></textarea> -->
                 </td>
                 <td colspan="2" class="text-right" style="vertical-align: middle;">
-                  Sub Total
+                  รวมเงิน
                 </td>
                 <td colspan="2">
-                  <input type="text" formControlName="subTotal" class="form-control text-right" readonly>
+                  <input type="text" formControlName="subTotal" class="form-control text-right" readonly >
                 </td>
               </tr>
               <tr>
                 <td colspan="2" class="text-right" style="vertical-align: middle;">
-                  VAT 7%
+                  ภาษี 7%
                 </td>
                 <td colspan="2">
                   <input type="text" formControlName="vat" class="form-control text-right" readonly>
@@ -160,10 +161,10 @@
               </tr>
               <tr>
                 <td colspan="2" class="text-right" style="vertical-align: middle;">
-                  TOTAL
+                  รวมสุทธิ
                 </td>
                 <td colspan="2">
-                  <input type="text" formControlName="Total" class="form-control text-right" readonly>
+                  <input type="text" formControlName="Total"  class="form-control text-right" readonly>
                 </td>
               </tr>
             </tbody>
@@ -173,8 +174,8 @@
 
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <button type="button" class="btn btn-success" (click)="onSave()">Create</button>
-        <button type="button" class="btn btn-secondary" (click)="onClose()">Cancel</button>
+        <button type="button" class="btn btn-success" (click)="onSave()">เพิ่มรายการ</button>
+        <button type="button" class="btn btn-secondary" (click)="onClose()">ยกเลิก</button>
       </div>
     </div>
   </div>

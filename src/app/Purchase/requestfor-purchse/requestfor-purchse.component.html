@@ -9,19 +9,19 @@
     <div class="form-inline justify-content-between no-print" style="margin-bottom: 25px;">
       <div class="create noselect">
         <button type="button" class="btn" style="border: 1px solid gray" (click)="openModalcreate()">
-          <i class="fas fa-plus-circle"></i> Create
+          <i class="fas fa-plus-circle"></i> เพิ่มรายการสั่งซื้อ
         </button>
       </div>
       <div class="search noselect">
         <select class="form-control" formControlName="search_by" style="border: 1px solid rgb(180 , 180, 180)">
-          <option value="al">All</option>
-          <option value="order_id">Order ID</option>
-          <option value="fullname_th">Name Th</option>
+          <option value="al">ทั้งหมด</option>
+          <option value="order_id">รหัสรายการสั่งซิ้อ</option>
+          <option value="fullname_th">ชื่อ</option>
         </select>
-        <input class="form-control" type="search" placeholder="Search..." formControlName="search" (keyup.enter)="checkErrors()"
+        <input class="form-control" type="search" placeholder="ค้นหา" formControlName="search" (keyup.enter)="checkErrors()"
           (keyup)="checkEmpty()" style="border: 1px solid rgb(180 , 180, 180)">
         <button type="button" [disabled]="this.formpage.invalid" class="btn" (click)="getOrder()" style="border: 1px solid gray">
-          <i style="cursor: auto" class="fas fa-search"></i> Search</button>
+          <i style="cursor: auto" class="fas fa-search"></i> ค้นหา</button>
       </div>
     </div>
     <div class="container-fluid justify-content-center">
@@ -41,12 +41,12 @@
     <div class="d-flex justify-content-end">
       <div class="form-group">
         <select class="form-control-sm" formControlName="numrow" (change)="getOrder()">
-          <option value="5">5 row</option>
-          <option value="10">10 row</option>
-          <option value="20">20 row</option>
+          <option value="5">5 แถว</option>
+          <option value="10">10 แถว</option>
+          <option value="20">20 แถว</option>
         </select>
         <select class="form-control-sm" formControlName="status" (change)="getOrder()">
-          <option value="al">All</option>
+          <option value="al">ทั้งหมด</option>
           <option value="BYG">กำลังดำเนินการสั่งซื้อ</option>
           <option value="PHD">สั่งซื้อเรียบร้อย</option>
           <option value="CED">ยกเลิกการสั่งซื้อ</option>
@@ -57,33 +57,33 @@
 
   <mat-table #table [dataSource]="dataSource" matSort style="margin-bottom: 25px;">
     <ng-container matColumnDef="order_id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Order ID </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> รหัสรายการสั่งซิ้อ</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.order_id}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="fullname_th">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ชื่อ </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.fullname_th}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="phone">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Phone </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> เบอร์โทร </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.phone}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="order_dt">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Order Date </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> วันที่สั่งซื้อ </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.order_dt | date:'dd-MM-yyy HH:mm'}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="status_name">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> สถานะ </mat-header-cell>
       <mat-cell *matCellDef="let element" [ngClass]="{'text-warning':element.status_id == 'BYG',
       'text-danger':element.status_id == 'CED', 'text-primary':element.status_id == 'PHD'}">
         {{element.status_name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <mat-header-cell class="text-center" *matHeaderCellDef> Action </mat-header-cell>
+      <mat-header-cell class="text-center" *matHeaderCellDef> ฟังก์ชั่น </mat-header-cell>
       <mat-cell class="text-center" *matCellDef="let element">
         <i class="fas fa-align-justify text-dark" [matMenuTriggerFor]="menu"></i>
         <mat-menu #menu="matMenu">
@@ -123,7 +123,7 @@
       </li>
       <li class="page-item" style="padding-right: 1px;">
         <button type="button" class="btn btn-light btn-nextprev" (click)="previousPage()" [disabled]="setPage == 1">
-          <i class="fas fa-caret-left"></i> Prev
+          <i class="fas fa-caret-left"></i> ก่อนหน้า
         </button>
       </li>
       <li class="page-item" *ngFor="let i of countPage" style="width: 40px;text-align: center">
@@ -131,7 +131,7 @@
       </li>
       <li class="page-item" style="padding-left: 1px;">
         <button type="button" class="btn btn-light btn-nextprev" (click)="nextPage()" [disabled]="setPage == checkdisBut">
-          Next
+          ถัดไป
           <i class="fas fa-caret-right"></i>
         </button>
       </li>
